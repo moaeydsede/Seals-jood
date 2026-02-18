@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ERP PRO Lite</title>
+
+  <!-- Bootstrap (RTL) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <!-- App -->
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#" id="brandTitle">ERP PRO Lite</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="nav-link active" href="#" data-view="viewCompany"><i class="fa-solid fa-building me-1"></i>بيانات الشركة</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-view="viewCustomers"><i class="fa-solid fa-users me-1"></i>العملاء</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-view="viewItems"><i class="fa-solid fa-boxes-stacked me-1"></i>المواد</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-view="viewInvoices"><i class="fa-solid fa-file-invoice me-1"></i>الفواتير</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-view="viewVouchers"><i class="fa-solid fa-receipt me-1"></i>السندات</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-view="viewTools"><i class="fa-solid fa-screwdriver-wrench me-1"></i>أدوات</a></li>
+        </ul>
+
+        <div class="d-flex gap-2 align-items-center">
+          <span class="badge text-bg-warning" id="connBadge">غير متصل</span>
+</div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-3">
+
+    <!-- VIEW: Login (Full Screen) -->
+    <section id="viewLogin" class="view view-login">
+      <div class="login-wrap">
+        <div class="login-card shadow-lg">
+          <div class="login-brand">
+            <div class="login-mark">ERP</div>
+            <div>
+              <div class="login-title" id="loginAppTitle">ERP PRO Lite</div>
+              <div class="login-sub">تسجيل الدخول</div>
+            </div>
+          </div>
+
+          <div class="login-form mt-3">
+            <label class="form-label">اسم المستخدم أو البريد</label>
+            <input class="form-control form-control-lg" id="loginEmail" type="text" placeholder="Admin أو name@email.com" autocomplete="username">
+
+            <label class="form-label mt-3">كلمة المرور</label>
+            <input class="form-control form-control-lg" id="loginPassword" type="password" placeholder="••••••••" autocomplete="current-password">
+
+            <div class="d-grid gap-2 mt-4">
+              <button class="btn btn-primary btn-lg" id="btnDoLogin" type="button">
+                <i class="fa-solid fa-right-to-bracket me-2"></i>دخول
+              </button>
+              <button class="btn btn-outline-primary btn-lg" id="btnDoRegister" type="button">
+                <i class="fa-solid fa-user-plus me-2"></i>إنشاء حساب
+              </button>
+</div>
+          </div>
+        </div>
+        <div class="login-foot">
+          <span class="badge text-bg-warning" id="connBadgeLogin">غير متصل</span>
+        </div>
+      </div>
+    </section>
+
+
+</div>
+
+    <!-- VIEW: Company -->
+    <section id="viewCompany" class="view">
+      <div class="row g-3">
+        <div class="col-lg-7">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <h5 class="m-0"><i class="fa-solid fa-building me-2"></i>بيانات الشركة</h5>
+                <button class="btn btn-primary btn-sm" id="btnSaveCompany"><i class="fa-solid fa-floppy-disk me-1"></i>حفظ</button>
+              </div>
+
+              <div class="row g-2">
+                <div class="col-12">
+                  <label class="form-label">اسم الشركة</label>
+                  <input class="form-control" id="companyName" placeholder="مثال: GoodKids / فوارس الشام">
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label">هاتف Sales 1</label>
+                  <input class="form-control" id="salesPhone1" placeholder="+2011...">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">هاتف Sales 2</label>
+                  <input class="form-control" id="salesPhone2" placeholder="+2010...">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">هاتف Factory</label>
+                  <input class="form-control" id="factoryPhone" placeholder="011...">
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">الموقع الجغرافي (رابط Google Maps)</label>
+                  <input class="form-control" id="companyLocationUrl" placeholder="https://maps.google.com/...">
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">روابط التواصل الاجتماعي</label>
+                  <div class="input-group">
+                    <input class="form-control" id="socialUrlInput" placeholder="الصق رابط Telegram/WhatsApp/Instagram/Facebook...">
+                    <button class="btn btn-outline-primary" id="btnAddSocial" type="button"><i class="fa-solid fa-plus"></i></button>
+                  </div>
+                  <div class="small text-muted mt-1">عند إضافة الرابط تظهر الأيقونة تلقائيًا حسب نوع الرابط.</div>
+                  <div class="d-flex flex-wrap gap-2 mt-2" id="socialChips"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-sm border-0 mt-3">
+            <div class="card-body">
+              <h6 class="mb-3"><i class="fa-solid fa-image me-2"></i>رفع لوجو الشركة</h6>
+              <div class="row g-2 align-items-center">
+                <div class="col-md-8">
+                  <input class="form-control" type="file" id="logoFile" accept="image/*">
+                  <div class="small text-muted mt-1">سيتم حفظ الصورة داخل Firebase Storage.</div>
+                </div>
+                <div class="col-md-4 d-grid">
+                  <button class="btn btn-outline-primary" id="btnUploadLogo" type="button"><i class="fa-solid fa-cloud-arrow-up me-1"></i>رفع</button>
+                </div>
+              </div>
+              <div class="mt-3 d-flex align-items-center gap-3">
+                <img id="logoPreview" class="logo-preview" alt="logo"/>
+                <div class="small text-muted" id="logoHint">لا يوجد لوجو مرفوع بعد.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="m-0 mb-3"><i class="fa-solid fa-eye me-2"></i>معاينة</h5>
+              <div class="p-3 rounded-3 bg-white border">
+                <div class="d-flex align-items-center gap-2">
+                  <img id="logoPreview2" class="logo-preview-sm" alt="logo"/>
+                  <div>
+                    <div class="fw-bold" id="previewCompanyName">—</div>
+                    <div class="small text-muted" id="previewPhones">—</div>
+                  </div>
+                </div>
+                <hr>
+                <div class="d-flex flex-wrap gap-2" id="previewSocial"></div>
+                <div class="mt-2">
+                  <a class="btn btn-sm btn-outline-secondary" target="_blank" id="previewMapBtn" href="#"><i class="fa-solid fa-location-dot me-1"></i>فتح الموقع</a>
+                </div>
+              </div>
+              <div class="small text-muted mt-2">
+                بعد إعداد Firebase وتسجيل الدخول، سيتم حفظ البيانات على السحابة ويمكنك فتحها من أي جهاز.
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-sm border-0 mt-3">
+            <div class="card-body">
+              <h6 class="mb-2"><i class="fa-solid fa-user-shield me-2"></i>الصلاحيات</h6>
+              <div class="small text-muted">
+                • المستخدم العادي: إضافة (عملاء/مواد/فواتير/سندات)<br>
+                • الأدمن فقط: تعديل/حذف الفواتير + أدوات الاستيراد/التصدير المتقدمة
+              </div>
+              <div class="mt-2 small" id="whoami">غير مسجل دخول</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: Customers -->
+    <section id="viewCustomers" class="view d-none">
+      <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+        <h5 class="m-0"><i class="fa-solid fa-users me-2"></i>العملاء</h5>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary btn-sm" id="btnNewCustomer" type="button"><i class="fa-solid fa-user-plus me-1"></i>إضافة عميل</button>
+          <div class="input-group input-group-sm">
+            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input class="form-control" id="customerSearch" placeholder="بحث: اسم/هاتف">
+          </div>
+        </div>
+      </div>
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>اسم العميل</th>
+                  <th>الهاتف</th>
+                  <th>العنوان</th>
+                  <th>شركة الشحن</th>
+                  <th class="text-end">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="customersTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: Items -->
+    <section id="viewItems" class="view d-none">
+      <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+        <h5 class="m-0"><i class="fa-solid fa-boxes-stacked me-2"></i>المواد</h5>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary btn-sm" id="btnNewItem" type="button"><i class="fa-solid fa-plus me-1"></i>إضافة مادة</button>
+          <div class="input-group input-group-sm">
+            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input class="form-control" id="itemSearch" placeholder="بحث: رقم/اسم موديل">
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>رقم الموديل</th>
+                  <th>اسم الموديل</th>
+                  <th>الوحدة</th>
+                  <th>سعر البيع</th>
+                  <th class="text-end">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="itemsTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: Invoices -->
+    <section id="viewInvoices" class="view d-none">
+      <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+        <h5 class="m-0"><i class="fa-solid fa-file-invoice me-2"></i>الفواتير</h5>
+        <div class="d-flex gap-2">
+          <button class="btn btn-success btn-sm" id="btnNewSaleInvoice" type="button"><i class="fa-solid fa-circle-plus me-1"></i>فاتورة مبيعات</button>
+          <button class="btn btn-warning btn-sm" id="btnNewReturnInvoice" type="button"><i class="fa-solid fa-rotate-left me-1"></i>مرتجع مبيعات</button>
+          <div class="input-group input-group-sm">
+            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input class="form-control" id="invoiceSearch" placeholder="بحث: رقم فاتورة/اسم/هاتف">
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>رقم</th>
+                  <th>النوع</th>
+                  <th>العميل</th>
+                  <th>الهاتف</th>
+                  <th>الإجمالي</th>
+                  <th>أضيفت بواسطة</th>
+                  <th>التاريخ/الوقت</th>
+                  <th class="text-end">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="invoicesTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: Vouchers -->
+    <section id="viewVouchers" class="view d-none">
+      <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+        <h5 class="m-0"><i class="fa-solid fa-receipt me-2"></i>السندات</h5>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary btn-sm" id="btnNewReceipt" type="button"><i class="fa-solid fa-hand-holding-dollar me-1"></i>سند قبض</button>
+          <button class="btn btn-danger btn-sm" id="btnNewPayment" type="button"><i class="fa-solid fa-money-bill-transfer me-1"></i>سند دفع</button>
+          <div class="input-group input-group-sm">
+            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input class="form-control" id="voucherSearch" placeholder="بحث: اسم/هاتف/رقم">
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>رقم</th>
+                  <th>النوع</th>
+                  <th>العميل</th>
+                  <th>الهاتف</th>
+                  <th>المبلغ</th>
+                  <th>أضيفت بواسطة</th>
+                  <th>التاريخ/الوقت</th>
+                  <th class="text-end">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="vouchersTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: Tools -->
+    <section id="viewTools" class="view d-none">
+      <div class="row g-3">
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="m-0 mb-2"><i class="fa-solid fa-file-excel me-2"></i>استيراد / تصدير Excel</h5>
+              <div class="small text-muted mb-3">
+                استيراد المواد/العملاء من Excel (XLSX). تصدير جميع البيانات إلى Excel.
+              </div>
+
+              
+
+              <div class="d-flex flex-column gap-2">
+                <div class="d-flex gap-2 flex-wrap">
+                  <button class="btn btn-outline-primary" id="btnExportAll" type="button"><i class="fa-solid fa-download me-1"></i>تصدير الكل (XLSX)</button>
+                  <button class="btn btn-outline-secondary" id="btnDownloadTemplates" type="button"><i class="fa-solid fa-file-arrow-down me-1"></i>قوالب Excel</button>
+                </div>
+
+                <div class="border rounded-3 p-3 bg-white">
+                  <div class="fw-bold mb-2">استيراد مواد</div>
+                  <input type="file" id="importItemsFile" class="form-control" accept=".xlsx,.xls"/>
+                  <button class="btn btn-primary mt-2" id="btnImportItems" type="button"><i class="fa-solid fa-upload me-1"></i>استيراد</button>
+                  <div class="small text-muted mt-1">الأعمدة المطلوبة: modelNo, modelName, unit, sellPrice</div>
+                </div>
+
+                <div class="border rounded-3 p-3 bg-white">
+                  <div class="fw-bold mb-2">استيراد عملاء</div>
+                  <input type="file" id="importCustomersFile" class="form-control" accept=".xlsx,.xls"/>
+                  <button class="btn btn-primary mt-2" id="btnImportCustomers" type="button"><i class="fa-solid fa-upload me-1"></i>استيراد</button>
+                  <div class="small text-muted mt-1">الأعمدة المطلوبة: name, phone, address, shipCompany</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="m-0 mb-2"><i class="fa-solid fa-print me-2"></i>الطباعة</h5>
+              <div class="small text-muted">
+                الطباعة تعمل من زر “طباعة” داخل الفاتورة أو السند. يمكنك الحفظ PDF (A4) من نافذة الطباعة.
+              </div>
+
+              <hr>
+
+              <h6 class="mb-2"><i class="fa-solid fa-mobile-screen-button me-2"></i>PWA</h6>
+              <div class="small text-muted">
+                يمكنك “تثبيت” التطبيق على الموبايل (Add to Home Screen) بعد رفعه على GitHub Pages.
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow-sm border-0 mt-3">
+            <div class="card-body">
+              <h6 class="mb-2"><i class="fa-solid fa-circle-question me-2"></i>خطوات سريعة</h6>
+              <ol class="small m-0">
+                <li>أنشئ مشروع Firebase وفعل Firestore + Storage + Auth.</li>
+                <li>ضع إعدادات Firebase في “إعداد Firebase”.</li>
+                <li>سجل دخول (Email/Password) ثم اجعل حسابك Admin من Firestore (users/{uid}).</li>
+                <li>ابدأ إضافة: بيانات الشركة → عملاء → مواد → فواتير.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Setup Modal -->
+  <div class="modal fade" id="setupModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-gear me-2"></i>إعداد Firebase</h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+
+          <label class="form-label">Firebase Config (JSON)</label>
+          <textarea class="form-control font-monospace" id="firebaseConfigText" rows="10" placeholder='{
+  "apiKey": "...",
+  "authDomain": "...",
+  "projectId": "...",
+  "storageBucket": "...",
+  "messagingSenderId": "...",
+  "appId": "..."
+}'></textarea>
+
+          <div class="row g-2 mt-2">
+            <div class="col-md-6">
+              <label class="form-label">اسم التطبيق (اختياري)</label>
+              <input class="form-control" id="appNameInput" placeholder="ERP PRO Lite">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">ملاحظة</label>
+              <div class="form-control bg-light" style="height:auto">بعد الحفظ: اضغط “تطبيق الإعداد” لإعادة التهيئة.</div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h6 class="mb-2"><i class="fa-solid fa-shield-halved me-2"></i>قواعد Firestore المقترحة</h6>
+          <pre class="small bg-light p-2 rounded-3 overflow-auto" id="rulesPreview"></pre>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">إغلاق</button>
+          <button class="btn btn-primary" id="btnSaveFirebaseConfig" type="button"><i class="fa-solid fa-floppy-disk me-1"></i>حفظ الإعداد</button>
+          <button class="btn btn-success" id="btnApplyFirebaseConfig" type="button"><i class="fa-solid fa-plug-circle-check me-1"></i>تطبيق الإعداد</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-right-to-bracket me-2"></i>تسجيل الدخول</h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+
+          <label class="form-label">Email</label>
+          <input class="form-control" id="loginEmail" type="email" placeholder="name@email.com">
+
+          <label class="form-label mt-2">Password</label>
+          <input class="form-control" id="loginPassword" type="password" placeholder="••••••••">
+
+          <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary" id="btnDoLogin" type="button"><i class="fa-solid fa-right-to-bracket me-1"></i>دخول</button>
+            <button class="btn btn-outline-secondary" id="btnDoRegister" type="button"><i class="fa-solid fa-user-plus me-1"></i>إنشاء حساب</button>
+            <button class="btn btn-outline-danger d-none" id="btnDoLogout" type="button"><i class="fa-solid fa-right-from-bracket me-1"></i>تسجيل خروج</button>
+          </div>
+
+          <div class="small text-muted mt-2">
+            جعل الحساب Admin: داخل Firestore أنشئ وثيقة users/{uid} وضع role = "admin".
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Modal -->
+  <div class="modal fade" id="customerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-user me-2"></i><span id="customerModalTitle">عميل</span></h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="customerId">
+          <div class="row g-2">
+            <div class="col-12">
+              <label class="form-label">اسم العميل</label>
+              <input class="form-control" id="custName">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">رقم الهاتف</label>
+              <input class="form-control" id="custPhone">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">شركة الشحن</label>
+              <input class="form-control" id="custShip">
+            </div>
+            <div class="col-12">
+              <label class="form-label">العنوان</label>
+              <input class="form-control" id="custAddress">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">إغلاق</button>
+          <button class="btn btn-primary" id="btnSaveCustomer" type="button"><i class="fa-solid fa-floppy-disk me-1"></i>حفظ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Item Modal -->
+  <div class="modal fade" id="itemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-box me-2"></i><span id="itemModalTitle">مادة</span></h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="itemId">
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label class="form-label">رقم الموديل</label>
+              <input class="form-control" id="itemModelNo" placeholder="902">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">اسم الموديل</label>
+              <input class="form-control" id="itemModelName" placeholder="بيجاما ...">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">وحدة المادة</label>
+              <input class="form-control" id="itemUnit" placeholder="قطعة">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">سعر البيع</label>
+              <input class="form-control" id="itemSellPrice" type="number" step="0.01" placeholder="265">
+            </div>
+          </div>
+          <div class="small text-muted mt-2">الترقيم التلقائي يكون داخل النظام كـ itemNo، أما رقم الموديل فهو الذي تكتبه (مثل 902).</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">إغلاق</button>
+          <button class="btn btn-primary" id="btnSaveItem" type="button"><i class="fa-solid fa-floppy-disk me-1"></i>حفظ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Editor Modal -->
+  <div class="modal fade" id="invoiceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-file-invoice me-2"></i><span id="invoiceModalTitle">فاتورة</span></h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="invoiceId">
+          <input type="hidden" id="invoiceType">
+          <div class="row g-2">
+            <div class="col-md-3">
+              <label class="form-label">رقم الفاتورة (تلقائي)</label>
+              <input class="form-control" id="invoiceNo" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">التاريخ</label>
+              <input class="form-control" id="invoiceDate" type="date">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">العميل</label>
+              <div class="input-group">
+                <input class="form-control" id="invoiceCustomer" placeholder="ابحث/اختر عميل" readonly>
+                <button class="btn btn-outline-primary" id="btnPickCustomer" type="button"><i class="fa-solid fa-user-check"></i></button>
+              </div>
+              <div class="small text-muted mt-1" id="invoiceCustomerMeta">—</div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+            <h6 class="m-0"><i class="fa-solid fa-list me-2"></i>بنود الفاتورة</h6>
+            <button class="btn btn-outline-primary btn-sm" id="btnAddLine" type="button"><i class="fa-solid fa-plus me-1"></i>إضافة سطر</button>
+          </div>
+
+          <div class="table-responsive mt-2">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th style="width:110px">رقم الموديل</th>
+                  <th>اسم المادة</th>
+                  <th style="width:90px">الوحدة</th>
+                  <th style="width:90px">السعر</th>
+                  <th style="width:90px">الكمية</th>
+                  <th style="width:110px">القيمة</th>
+                  <th class="text-end" style="width:70px">حذف</th>
+                </tr>
+              </thead>
+              <tbody id="invoiceLinesTbody"></tbody>
+            </table>
+          </div>
+
+          <div class="row g-2 mt-2">
+            <div class="col-md-4">
+              <label class="form-label">ملاحظات (اختياري)</label>
+              <input class="form-control" id="invoiceNotes" placeholder="...">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">رصيد العميل قبل الفاتورة (اختياري)</label>
+              <input class="form-control" id="balanceBefore" type="number" step="0.01" value="0">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">الإجمالي</label>
+              <input class="form-control fw-bold" id="invoiceTotal" readonly value="0.00">
+            </div>
+          </div>
+
+          <div class="small text-muted mt-2">
+            عند كتابة رقم الموديل سيتم جلب (الاسم/الوحدة/السعر) تلقائيًا من شاشة المواد.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="me-auto small text-muted" id="invoicePermHint"></div>
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">إغلاق</button>
+          <button class="btn btn-outline-dark" id="btnPrintInvoice" type="button"><i class="fa-solid fa-print me-1"></i>طباعة</button>
+          <button class="btn btn-primary" id="btnSaveInvoice" type="button"><i class="fa-solid fa-floppy-disk me-1"></i>حفظ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Voucher Modal -->
+  <div class="modal fade" id="voucherModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-receipt me-2"></i><span id="voucherModalTitle">سند</span></h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="voucherId">
+          <input type="hidden" id="voucherType">
+          <div class="row g-2">
+            <div class="col-md-4">
+              <label class="form-label">رقم السند (تلقائي)</label>
+              <input class="form-control" id="voucherNo" readonly>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">التاريخ</label>
+              <input class="form-control" id="voucherDate" type="date">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">المبلغ</label>
+              <input class="form-control" id="voucherAmount" type="number" step="0.01" value="0">
+            </div>
+            <div class="col-12">
+              <label class="form-label">العميل</label>
+              <div class="input-group">
+                <input class="form-control" id="voucherCustomer" readonly placeholder="اختر عميل">
+                <button class="btn btn-outline-primary" id="btnPickCustomerForVoucher" type="button"><i class="fa-solid fa-user-check"></i></button>
+              </div>
+              <div class="small text-muted mt-1" id="voucherCustomerMeta">—</div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">ملاحظات</label>
+              <input class="form-control" id="voucherNotes" placeholder="...">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">إغلاق</button>
+          <button class="btn btn-outline-dark" id="btnPrintVoucher" type="button"><i class="fa-solid fa-print me-1"></i>طباعة</button>
+          <button class="btn btn-primary" id="btnSaveVoucher" type="button"><i class="fa-solid fa-floppy-disk me-1"></i>حفظ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Picker Modal (Customers) -->
+  <div class="modal fade" id="pickerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa-solid fa-users me-2"></i>اختيار عميل</h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group input-group-sm mb-2">
+            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input class="form-control" id="pickerSearch" placeholder="بحث: اسم/هاتف">
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>الاسم</th>
+                  <th>الهاتف</th>
+                  <th>العنوان</th>
+                  <th class="text-end">اختيار</th>
+                </tr>
+              </thead>
+              <tbody id="pickerTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print Area -->
+  <div id="printArea" class="d-none"></div>
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.19.3/dist/xlsx.full.min.js"></script>
+
+  <!-- App -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
