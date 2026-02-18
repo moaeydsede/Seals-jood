@@ -1,0 +1,219 @@
+/* ERP PRO Lite - RTL - Mobile First */
+:root{
+  --card-radius: 16px;
+}
+body{ font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial; }
+.card{ border-radius: var(--card-radius); }
+.logo-preview{ width: 86px; height: 86px; object-fit: contain; border-radius: 14px; border: 1px dashed #cfd6df; background:#fff; }
+.logo-preview-sm{ width: 44px; height: 44px; object-fit: contain; border-radius: 10px; border: 1px dashed #cfd6df; background:#fff; }
+.view{ min-height: 55vh; }
+.chip{
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.35rem .6rem; border-radius: 999px; border: 1px solid #e6e9ef; background:#fff;
+  font-size:.9rem;
+}
+.chip i{ width: 18px; text-align:center; }
+.table thead th{ white-space:nowrap; }
+.table td{ vertical-align:middle; }
+.mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+
+/* Login Screen */
+.view-login{
+  min-height: calc(100vh - 70px);
+  display:none;
+}
+.login-wrap{
+  min-height: calc(100vh - 110px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 18px 10px;
+}
+.login-card{
+  width: min(460px, 100%);
+  background: #fff;
+  border-radius: 22px;
+  padding: 22px;
+  border: 1px solid #e9eef5;
+}
+.login-brand{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+}
+.login-mark{
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: #0d6efd;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 20px;
+}
+.login-title{
+  font-size: 20px;
+  font-weight: 800;
+}
+.login-sub{
+  color:#6b7280;
+  margin-top: 2px;
+}
+.login-foot{
+  margin-top: 10px;
+  text-align:center;
+}
+
+/* Background */
+body.bg-light{
+  background: radial-gradient(1200px 600px at 90% -10%, rgba(13,110,253,.20), transparent 60%),
+              radial-gradient(900px 450px at -10% 20%, rgba(31,111,139,.18), transparent 60%),
+              #f6f8fb !important;
+}
+
+/* Print A4 (Invoice like sample) */
+@media print{
+  body{ background:#fff !important; }
+  nav, #topAlert, .view, .modal, .toast{ display:none !important; }
+  #printArea{ display:block !important; }
+}
+#printArea{ padding:0; }
+.print-page{
+  width: 210mm;
+  min-height: 297mm;
+  padding: 16mm 14mm;
+  margin: 0 auto;
+  background: #fff;
+  color:#111;
+  direction: rtl;
+}
+.print-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 10mm;
+  margin-bottom: 6mm;
+}
+.print-header .left{
+  flex: 0 0 auto;
+}
+.print-header .right{
+  flex: 1 1 auto;
+  text-align: end;
+}
+.print-logo{
+  width: 75mm;
+  height: 24mm;
+  object-fit: contain;
+}
+.contact-title{
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 2mm;
+}
+.contact-icons{
+  display:flex;
+  justify-content:flex-end;
+  gap: 10mm;
+  align-items:center;
+}
+.contact-icons .ic{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 2mm;
+  font-size: 12px;
+}
+.contact-icons i{
+  font-size: 26px;
+}
+.contact-icons .num{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.print-title{
+  text-align:center;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 4mm 0 4mm;
+}
+.print-meta{
+  display:flex;
+  justify-content:space-between;
+  font-size: 12.5px;
+  margin-bottom: 4mm;
+}
+.print-meta .block div{ margin: 1mm 0; }
+.print-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size: 12.5px;
+}
+.print-table th{
+  background:#1f6f8b; /* teal like sample */
+  color:#fff;
+  padding: 6px 6px;
+  border:1px solid #b9c7d1;
+  text-align:center;
+  white-space:nowrap;
+}
+.print-table td{
+  padding: 6px 6px;
+  border:1px solid #c7d2da;
+  vertical-align:top;
+}
+.print-table td.mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  text-align:center;
+}
+.print-summary{
+  margin-top: 6mm;
+  display:flex;
+  justify-content:space-between;
+  gap: 8mm;
+}
+.print-summary .box{
+  width: 48%;
+  border:1px solid #c7d2da;
+  border-radius: 6px;
+  overflow:hidden;
+}
+.print-summary .box .rowx{
+  display:flex;
+  justify-content:space-between;
+  padding: 5px 8px;
+  font-size: 12.5px;
+}
+.print-summary .box .rowx.head{
+  background:#1f6f8b;
+  color:#fff;
+  font-weight:700;
+}
+.print-summary .box .rowx b{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.print-words{
+  margin-top: 5mm;
+  text-align:center;
+  font-size: 13px;
+  font-weight: 600;
+}
+.print-balances{
+  margin-top: 6mm;
+  display:flex;
+  justify-content:space-between;
+  font-size: 14px;
+  font-weight: 700;
+}
+.print-footer{
+  margin-top: 10mm;
+  display:flex;
+  justify-content:space-between;
+  font-size: 11.5px;
+  border-top: 1px solid #c7d2da;
+  padding-top: 3mm;
+  color:#333;
+}
