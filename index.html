@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Jood kids seals — نظام المبيعات</title>
+<meta name="theme-color" content="#0b1220"/>
+<style>
+:root{--bg:#0b1220;--card:#111a2d;--text:#e9eefb;--muted:#a9b6d6;--line:rgba(255,255,255,.10);
+--accent:#6ea8ff;--danger:#ff5c7a;--ok:#3ddc97;--warn:#ffd36e;--shadow:0 10px 25px rgba(0,0,0,.35);
+--r:18px;--r2:14px;--font:system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font-family:var(--font);color:var(--text);
+background:radial-gradient(1200px 700px at 80% -10%, rgba(110,168,255,.25), transparent 55%),
+radial-gradient(900px 500px at 10% 10%, rgba(61,220,151,.12), transparent 50%),var(--bg);}
+a{color:inherit;text-decoration:none}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px 14px;
+background:rgba(10,16,30,.75);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.iconbtn{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line);
+color:var(--text);font-size:18px}
+.brand{display:flex;flex-direction:column;gap:2px;min-width:0}
+.brand-title{font-weight:900}
+.brand-sub{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{margin-inline-start:auto;display:flex;align-items:center;gap:10px}
+.chip{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);
+color:var(--muted);font-size:12px;max-width:55vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{border:none;cursor:pointer;padding:10px 12px;border-radius:14px;
+background:linear-gradient(180deg, rgba(110,168,255,.95), rgba(110,168,255,.70));color:#081022;font-weight:900;
+box-shadow:0 10px 20px rgba(110,168,255,.25)}
+.btn.ghost{background:rgba(255,255,255,.06);border:1px solid var(--line);box-shadow:none;color:var(--text)}
+.btn.danger{background:linear-gradient(180deg, rgba(255,92,122,.95), rgba(255,92,122,.70));
+color:#22050b;box-shadow:0 10px 20px rgba(255,92,122,.20)}
+.btn.ok{background:linear-gradient(180deg, rgba(61,220,151,.95), rgba(61,220,151,.70));
+color:#042014;box-shadow:0 10px 20px rgba(61,220,151,.18)}
+.btn.small{padding:8px 10px;border-radius:12px;font-size:13px}
+.sidebar{position:fixed;inset:0 auto 0 0;width:min(360px,92vw);background:rgba(15,25,48,.92);
+backdrop-filter:blur(12px);border-inline-end:1px solid var(--line);transform:translateX(-105%);transition:transform .2s ease;
+z-index:30;display:flex;flex-direction:column}
+.sidebar.open{transform:translateX(0)}
+.sidebar-head{display:flex;align-items:center;justify-content:space-between;padding:14px;border-bottom:1px solid var(--line)}
+.sidebar-title{font-weight:900}
+.nav{padding:10px;display:flex;flex-direction:column;gap:8px;overflow:auto}
+.nav a{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;border:1px solid transparent;background:rgba(255,255,255,.04)}
+.nav a.active{border-color:rgba(110,168,255,.65);background:rgba(110,168,255,.10)}
+.nav .tag{margin-inline-start:auto;font-size:11px;color:var(--muted);padding:4px 8px;border:1px solid var(--line);
+border-radius:999px;background:rgba(255,255,255,.04)}
+.sidebar-foot{margin-top:auto;padding:12px 14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.main{padding:16px;max-width:1100px;margin:0 auto}
+.card{background:rgba(17,26,45,.86);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.card.pad{padding:14px}
+.grid{display:grid;gap:12px} .cols2{grid-template-columns:1fr} .cols3{grid-template-columns:1fr}
+@media(min-width:820px){.cols2{grid-template-columns:1fr 1fr} .cols3{grid-template-columns:1fr 1fr 1fr}}
+.h1{font-size:22px;font-weight:900;margin:0 0 10px} .h2{font-size:16px;font-weight:900;margin:0 0 10px} .muted{color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap} .spacer{flex:1}
+.table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.table th,.table td{padding:10px;border-bottom:1px solid var(--line);font-size:13px} .table th{text-align:right;color:var(--muted);font-weight:900}
+.table tr:last-child td{border-bottom:none} .table .num{text-align:left;font-variant-numeric:tabular-nums} .table .actions{white-space:nowrap;text-align:left}
+.field{display:flex;flex-direction:column;gap:6px} .label{color:var(--muted);font-size:12px}
+.input,select,textarea{width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);outline:none}
+textarea{min-height:90px;resize:vertical}
+.toast{position:fixed;left:16px;bottom:16px;z-index:100;padding:12px 14px;border-radius:14px;border:1px solid var(--line);
+background:rgba(17,26,45,.92);backdrop-filter:blur(8px);box-shadow:var(--shadow);display:none;max-width:min(520px,90vw)}
+.toast.show{display:block}
+.hr{height:1px;background:var(--line);margin:10px 0}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);
+background:rgba(255,255,255,.04);color:var(--muted);font-size:12px}
+.badge.ok{color:var(--ok);border-color:rgba(61,220,151,.30)} .badge.warn{color:var(--warn);border-color:rgba(255,211,110,.30)}
+.badge.danger{color:var(--danger);border-color:rgba(255,92,122,.30)}
+@media print{body{background:#fff;color:#000} .topbar,.sidebar,.toast,.no-print{display:none !important} .main{padding:0;max-width:unset;margin:0}
+.card{box-shadow:none;border:none;border-radius:0;background:#fff}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn" id="btnMenu" aria-label="القائمة">☰</button>
+  <div class="brand">
+    <div class="brand-title">Jood kids seals</div>
+    <div class="brand-sub">نظام المبيعات — GitHub + Firebase</div>
+  </div>
+  <div class="topbar-right">
+    <div class="chip" id="chipUser">غير مسجل</div>
+    <button class="btn ghost" id="btnLogout" style="display:none">تسجيل خروج</button>
+  </div>
+</header>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <div class="sidebar-title">القائمة</div>
+    <button class="iconbtn" id="btnCloseMenu">✕</button>
+  </div>
+  <nav class="nav" id="nav"></nav>
+  <div class="sidebar-foot">نسخة: <span id="ver">2026.02.19-FULL</span></div>
+</aside>
+
+<main class="main">
+  <div class="toast" id="toast"></div>
+  <div id="view"></div>
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, deleteDoc,
+  query, where, orderBy, limit, getDocs, serverTimestamp, runTransaction, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { getStorage, ref as sRef, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+
+const firebaseConfig = {
+  "apiKey": "AIzaSyCe2W80FgybECOwF-55fUBZhxzTOYjpcUQ",
+  "authDomain": "seals-jood.firebaseapp.com",
+  "projectId": "seals-jood",
+  "storageBucket": "seals-jood.firebasestorage.app",
+  "messagingSenderId": "835360944508",
+  "appId": "1:835360944508:web:dec8cf1d16830553d334f9"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+const PERMS = {
+  invoices_view:'عرض الفواتير', invoices_create:'إنشاء فواتير', invoices_print:'طباعة فواتير',
+  returns_view:'عرض المرتجعات', returns_create:'إنشاء مرتجع',
+  payments_view:'عرض الدفعات', payments_create:'إنشاء دفعات', payments_print:'طباعة سند قبض',
+  customers_view:'عرض العملاء', customers_manage:'إدارة العملاء',
+  products_view:'عرض الأصناف', products_manage:'إدارة الأصناف',
+  reports_view:'عرض التقارير', reports_export:'تصدير التقارير',
+  audit_view:'عرض سجل العمليات', users_manage:'إدارة المستخدمين', company_manage:'بيانات الشركة'
+};
+
+const elView = document.getElementById('view');
+const elNav = document.getElementById('nav');
+const elSidebar = document.getElementById('sidebar');
+const elChipUser = document.getElementById('chipUser');
+const btnLogout = document.getElementById('btnLogout');
+
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(window.__t); window.__t=setTimeout(()=>el.classList.remove('show'),2600);
+}
+function escapeHtml(s=''){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");}
+function fmtMoney(n){return Number(n||0).toLocaleString('ar-EG',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fmtDate(ts){const d=ts?.toDate?ts.toDate():new Date(ts||Date.now());return d.toLocaleDateString('ar-EG');}
+function fmtDateTime(ts){const d=ts?.toDate?ts.toDate():new Date(ts||Date.now());return d.toLocaleString('ar-EG');}
+function clamp(n,min,max){return Math.min(max,Math.max(min,n));}
+
+function hasPerm(me,key){ if(!me) return false; if(me.role==='admin') return true; return !!(me.permissions && me.permissions[key]); }
+function need(me,perm){ if(!hasPerm(me,perm)) return `<div class="card pad"><div class="h1">صلاحية غير كافية</div><div class="muted">لا تملك صلاحية: <b>${escapeHtml(PERMS[perm]||perm)}</b></div></div>`; return null; }
+
+async function logAudit(me, action, meta={}){
+  try{
+    await addDoc(collection(db,'auditLogs'),{action,byUid:me?.uid||null,byName:me?.displayName||me?.email||'unknown',at:serverTimestamp(),meta});
+  }catch(e){}
+}
+
+async function getCompany(){
+  const s=await getDoc(doc(db,'settings','company'));
+  return s.exists()?s.data():{name:'Jood kids seals',phones:[],address:'',footerNote:'',logoUrl:''};
+}
+
+async function listCustomersOptions(){
+  const qy=query(collection(db,'customers'), orderBy('name','asc'), limit(500));
+  const ss=await getDocs(qy);
+  const opts=['<option value="">— اختر —</option>'];
+  ss.forEach(s=>opts.push(`<option value="${s.id}">${escapeHtml(s.data().name||'')}</option>`));
+  return opts.join('');
+}
+
+async function listProducts(){
+  const qy=query(collection(db,'products'), orderBy('name','asc'), limit(1000));
+  const ss=await getDocs(qy);
+  const list=[];
+  ss.forEach(s=>{const d=s.data(); if(d.active===false) return; list.push({id:s.id, name:d.name, code:d.code||'', price:Number(d.price||0)});});
+  return list;
+}
+
+function calcLine(qty, price, discType, discVal){
+  qty=Number(qty||0); price=Number(price||0);
+  const gross=qty*price;
+  let disc = discType==='percent' ? gross*(Number(discVal||0)/100) : Number(discVal||0);
+  disc=clamp(disc,0,gross);
+  return {gross,disc,net:gross-disc};
+}
+
+function amountToArabicWordsEGP(amount){
+  const num=Number(amount||0); const pounds=Math.floor(num); const piasters=Math.round((num-pounds)*100);
+  function toWords(n){
+    const ones=['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة'];
+    const tens=['','عشرة','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+    const teens=['عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر'];
+    const hundreds=['','مائة','مائتان','ثلاثمائة','أربعمائة','خمسمائة','ستمائة','سبعمائة','ثمانمائة','تسعمائة'];
+    if(n<10) return ones[n];
+    if(n<20) return teens[n-10];
+    if(n<100){const o=n%10,t=Math.floor(n/10);return o?`${ones[o]} و ${tens[t]}`:tens[t];}
+    if(n<1000){const r=n%100,h=Math.floor(n/100);return r?`${hundreds[h]} و ${toWords(r)}`:hundreds[h];}
+    if(n<1_000_000){const r=n%1000,th=Math.floor(n/1000);const thW=th===1?'ألف':(th===2?'ألفان':`${toWords(th)} ألف`);return r?`${thW} و ${toWords(r)}`:thW;}
+    const r=n%1_000_000,m=Math.floor(n/1_000_000);const mW=m===1?'مليون':(m===2?'مليونان':`${toWords(m)} مليون`);return r?`${mW} و ${toWords(r)}`:mW;
+  }
+  return `${toWords(pounds)} جنيه مصري و ${piasters?toWords(piasters):'صفر'} قرش فقط لا غير`;
+}
+
+async function viewLogin(){
+  return `<div class="card pad" style="max-width:520px;margin:24px auto;">
+    <div class="h1">تسجيل الدخول</div>
+    <div class="muted">ادخل البريد وكلمة المرور (Firebase Auth)</div>
+    <div class="hr"></div>
+    <form id="formLogin" class="grid">
+      <div class="field"><div class="label">البريد الإلكتروني</div><input class="input" name="email" type="email" required></div>
+      <div class="field"><div class="label">كلمة المرور</div><input class="input" name="password" type="password" required></div>
+      <div class="row"><button class="btn" type="submit">دخول</button></div>
+    </form>
+  </div>`;
+}
+
+function bindLoginForm(){
+  const form=document.getElementById('formLogin');
+  if(!form) return;
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(form);
+    try{
+      await signInWithEmailAndPassword(auth, fd.get('email').toString().trim(), fd.get('password').toString());
+      toast('تم تسجيل الدخول');
+    }catch(err){toast('فشل الدخول: تأكد من البيانات');}
+  });
+}
+
+async function viewDashboard(me){
+  const deny=need(me,'reports_view'); if(deny) return deny;
+  const start=Timestamp.fromDate(new Date(Date.now()-30*24*3600*1000));
+  const qInv=query(collection(db,'invoices'), where('date','>=',start), orderBy('date','desc'), limit(200));
+  const snaps=await getDocs(qInv);
+  let sales=0, returns=0, count=0;
+  snaps.forEach(s=>{const d=s.data();count++; if(d.docType==='return') returns+=Number(d.grandTotal||0); else sales+=Number(d.grandTotal||0);});
+  const net=sales-returns;
+  return `<div class="grid">
+    <div class="card pad">
+      <div class="h1">الرئيسية</div>
+      <div class="muted">ملخص آخر 30 يوم</div>
+      <div class="hr"></div>
+      <div class="row">
+        <span class="badge">مبيعات: <b>${fmtMoney(sales)}</b> ج</span>
+        <span class="badge">مرتجعات: <b>${fmtMoney(returns)}</b> ج</span>
+        <span class="badge ok">صافي: <b>${fmtMoney(net)}</b> ج</span>
+        <span class="badge">عدد: <b>${count}</b></span>
+      </div>
+      <div class="hr"></div>
+      <div class="row">
+        <a class="btn small" href="#/sale/new">فاتورة جديدة</a>
+        <a class="btn small ghost" href="#/return/new">مرتجع جديد</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function viewInvoices(me, docType){
+  const perm = docType==='sale' ? 'invoices_view' : 'returns_view';
+  const deny=need(me,perm); if(deny) return deny;
+  const qy=query(collection(db,'invoices'), where('docType','==',docType), orderBy('date','desc'), limit(200));
+  const snaps=await getDocs(qy);
+  const rows=[];
+  snaps.forEach(s=>{const d=s.data();
+    rows.push(`<tr>
+      <td class="num">${d.invoiceNo??''}</td>
+      <td>${escapeHtml(d.customerNameSnapshot||'—')}</td>
+      <td>${fmtDate(d.date)}</td>
+      <td class="num">${fmtMoney(d.grandTotal||0)}</td>
+      <td>${d.payType==='credit'?'<span class="badge warn">أجل</span>':'<span class="badge ok">نقدي</span>'}</td>
+      <td class="actions"><a class="btn small ghost" href="#/${docType==='sale'?'sale':'return'}/${s.id}">فتح</a></td>
+    </tr>`);
+  });
+  const canCreate=hasPerm(me, docType==='sale'?'invoices_create':'returns_create');
+  return `<div class="card pad">
+    <div class="row">
+      <div><div class="h1">${docType==='sale'?'فواتير المبيعات':'مرتجعات المبيعات'}</div></div>
+      <div class="spacer"></div>
+      ${canCreate?`<a class="btn no-print" href="#/${docType==='sale'?'sale':'return'}/new">${docType==='sale'?'فاتورة جديدة':'مرتجع جديد'}</a>`:''}
+    </div>
+    <div class="hr"></div>
+    <div style="overflow:auto">
+      <table class="table"><thead><tr>
+        <th class="num">رقم</th><th>العميل</th><th>التاريخ</th><th class="num">الإجمالي</th><th>النوع</th><th class="actions">إجراءات</th>
+      </tr></thead><tbody>${rows.join('') || `<tr><td colspan="6" class="muted">لا توجد بيانات.</td></tr>`}</tbody></table>
+    </div>
+  </div>`;
+}
+
+function buildLineRow(idx,item,products,disabled){
+  const prod=products.find(p=>p.id===item.productId)||null;
+  const opts=['<option value="">— اختر صنف —</option>'].concat(products.map(p=>`<option value="${p.id}" ${item.productId===p.id?'selected':''}>${escapeHtml(p.name)} — ${fmtMoney(p.price)} ج</option>`)).join('');
+  const qty=item.qty??1;
+  const price=item.priceSnapshot??(prod?.price||0);
+  const discType=item.discountTypeItem??'amount';
+  const discVal=item.discountValueItem??0;
+  return `<tr data-idx="${idx}">
+    <td class="muted">${escapeHtml(item.codeSnapshot||prod?.code||'')}</td>
+    <td><select data-f="productId" ${disabled?'disabled':''}>${opts}</select></td>
+    <td class="num"><input class="input" style="padding:8px" type="number" min="0" step="1" data-f="qty" value="${qty}" ${disabled?'disabled':''}></td>
+    <td>قطعة</td>
+    <td class="num"><input class="input" style="padding:8px" type="number" step="0.01" data-f="priceSnapshot" value="${price}" ${disabled?'disabled':''}></td>
+    <td class="num">
+      <div class="row" style="justify-content:flex-start">
+        <select data-f="discountTypeItem" style="max-width:96px" ${disabled?'disabled':''}>
+          <option value="amount" ${discType==='amount'?'selected':''}>مبلغ</option>
+          <option value="percent" ${discType==='percent'?'selected':''}>٪</option>
+        </select>
+        <input class="input" style="padding:8px;max-width:140px" type="number" step="0.01" data-f="discountValueItem" value="${discVal}" ${disabled?'disabled':''}>
+      </div>
+    </td>
+    <td class="num" data-calc="total">0.00</td>
+    <td class="actions no-print"><button class="btn small danger" type="button" data-act="del" ${disabled?'disabled':''}>حذف</button></td>
+  </tr>`;
+}
+
+function computeFromUI(form,stateItems){
+  const fd=new FormData(form);
+  const date=Timestamp.fromDate(new Date(fd.get('date')+'T12:00:00'));
+  const payType=fd.get('payType')||'cash';
+  const customerId=fd.get('customerId')||'';
+  const note=(fd.get('note')||'').toString().trim();
+  const discountTypeInvoice=fd.get('discountTypeInvoice')||'amount';
+  const discountValueInvoice=Number(fd.get('discountValueInvoice')||0);
+  let paid=Number(fd.get('paid')||0);
+
+  const items=stateItems.map(it=>{
+    const qty=Number(it.qty||0);
+    const price=Number(it.priceSnapshot||0);
+    const discType=it.discountTypeItem||'amount';
+    const discVal=Number(it.discountValueItem||0);
+    const {gross,disc,net}=calcLine(qty,price,discType,discVal);
+    return {productId:it.productId, codeSnapshot:it.codeSnapshot||'', nameSnapshot:it.nameSnapshot||'', qty, unit:'قطعة',
+      priceSnapshot:price, discountTypeItem:discType, discountValueItem:discVal, lineGross:gross, lineDiscount:disc, lineTotal:net};
+  }).filter(x=>x.productId && x.qty>0);
+
+  const subtotal=items.reduce((a,x)=>a+Number(x.lineGross||0),0);
+  const discItems=items.reduce((a,x)=>a+Number(x.lineDiscount||0),0);
+  const afterItems=items.reduce((a,x)=>a+Number(x.lineTotal||0),0);
+  let discInv = discountTypeInvoice==='percent' ? afterItems*(discountValueInvoice/100) : discountValueInvoice;
+  discInv=clamp(discInv,0,afterItems);
+  const grandTotal=afterItems-discInv;
+
+  if(payType==='cash') paid=grandTotal;
+  paid=clamp(paid,0,grandTotal);
+  const remaining=grandTotal-paid;
+
+  return {date,payType,customerId,note,items,subtotal,discountTypeInvoice,discountValueInvoice,
+    discountItemsTotal:discItems, discountInvoiceTotal:discInv, grandTotal, paid, remaining};
+}
+
+function renderInvoiceEditor(me, docType, model, customersOptions, products){
+  const isAdmin = me.role==='admin';
+  const canEdit = isAdmin;
+  const isNew = !model?.id;
+  const payType = model?.payType || 'cash';
+  const discountTypeInvoice = model?.discountTypeInvoice || 'amount';
+  const discountValueInvoice = model?.discountValueInvoice ?? 0;
+  const paid = model?.paid ?? 0;
+  const dateVal = new Date((model?.date?.toDate?model.date.toDate():model?.date||Date.now())).toISOString().slice(0,10);
+  const title = docType==='sale'?'فاتورة مبيعات':'مرتجع مبيعات';
+  return `<div class="card pad">
+    <div class="row">
+      <div><div class="h1">${title}</div><div class="muted">${isNew?'إنشاء جديد':'عرض/تعديل (الأدمن فقط)'} </div></div>
+      <div class="spacer"></div>
+      <a class="btn ghost small no-print" href="#/${docType==='sale'?'invoices':'returns'}">رجوع</a>
+    </div>
+    <div class="hr"></div>
+    <form id="formInv" class="grid cols2">
+      <div class="field"><div class="label">التاريخ</div><input class="input" name="date" type="date" value="${dateVal}" ${(!isNew&&!canEdit)?'disabled':''}></div>
+      <div class="field"><div class="label">نوع الفاتورة</div>
+        <select name="payType" ${(!isNew&&!canEdit)?'disabled':''}>
+          <option value="cash" ${payType==='cash'?'selected':''}>نقدي</option>
+          <option value="credit" ${payType==='credit'?'selected':''}>أجل</option>
+        </select>
+      </div>
+      <div class="field"><div class="label">العميل</div><select name="customerId" ${(!isNew&&!canEdit)?'disabled':''}>${customersOptions}</select></div>
+      <div class="field"><div class="label">ملاحظة</div><input class="input" name="note" value="${escapeHtml(model?.note||'')}" ${(!isNew&&!canEdit)?'disabled':''}></div>
+
+      <div class="card pad" style="grid-column:1/-1;">
+        <div class="row no-print"><div class="h2">بنود</div><div class="spacer"></div>
+          <button type="button" class="btn small" id="btnAddLine" ${(!isNew&&!canEdit)?'disabled':''}>إضافة بند</button>
+        </div>
+        <div class="hr"></div>
+        <div style="overflow:auto">
+          <table class="table" id="tblLines"><thead><tr>
+            <th>رمز</th><th>الصنف</th><th class="num">الكمية</th><th>الوحدة</th><th class="num">السعر</th><th class="num">خصم</th><th class="num">الإجمالي</th><th class="actions no-print">إجراءات</th>
+          </tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+
+      <div class="card pad" style="grid-column:1/-1;">
+        <div class="grid cols3">
+          <div class="field"><div class="label">خصم الفاتورة</div>
+            <div class="row">
+              <select name="discountTypeInvoice" style="max-width:140px" ${(!isNew&&!canEdit)?'disabled':''}>
+                <option value="amount" ${discountTypeInvoice==='amount'?'selected':''}>مبلغ</option>
+                <option value="percent" ${discountTypeInvoice==='percent'?'selected':''}>٪</option>
+              </select>
+              <input class="input" name="discountValueInvoice" type="number" step="0.01" value="${discountValueInvoice}" ${(!isNew&&!canEdit)?'disabled':''}>
+            </div>
+          </div>
+          <div class="field"><div class="label">المدفوع</div>
+            <input class="input" name="paid" type="number" step="0.01" value="${paid}" ${(!isNew&&!canEdit)?'disabled':''}>
+            <div class="muted">نقدي = الإجمالي تلقائياً</div>
+          </div>
+          <div class="field"><div class="label">المبلغ بالحروف</div><div class="input" id="moneyWords" style="min-height:48px;display:flex;align-items:center;"></div></div>
+        </div>
+        <div class="hr"></div>
+        <div class="row">
+          <span class="badge" id="bSubtotal">المجموع: 0.00</span>
+          <span class="badge" id="bDiscItems">خصم الأصناف: 0.00</span>
+          <span class="badge" id="bDiscInv">خصم الفاتورة: 0.00</span>
+          <span class="badge ok" id="bGrand">الإجمالي: 0.00</span>
+          <span class="badge" id="bRemaining">المتبقي: 0.00</span>
+          <div class="spacer"></div>
+          ${isNew?`<button class="btn ok no-print" type="submit">حفظ</button>`:(canEdit?`<button class="btn ok no-print" type="submit">حفظ التعديل</button>`:'')}
+          ${!isNew?`<button class="btn ghost no-print" type="button" id="btnPrintA4">طباعة A4</button>
+          <button class="btn ghost no-print" type="button" id="btnPrintTh">طباعة حراري</button>`:''}
+          ${(!isNew && me.role==='admin')?`<button class="btn danger no-print" type="button" id="btnDelete">حذف</button>`:''}
+        </div>
+      </div>
+    </form>
+  </div>`;
+}
+
+function renderInvoicePrint(company, inv, kind='a4'){
+  const logo = company.logoUrl ? `<img src="${escapeHtml(company.logoUrl)}" style="max-height:${kind==='a4'?'70px':'50px'};object-fit:contain"/>` : '';
+  const phones = (company.phones||[]).map(p=>escapeHtml(p)).join(' — ');
+  const title = inv.docType==='return' ? 'مرتجع مبيعات' : 'فاتورة مبيعات';
+  const pay = inv.payType==='credit' ? 'أجل' : 'نقدي';
+  const date = fmtDate(inv.date);
+  const rows = (inv.items||[]).map(x=>`
+    <tr><td>${escapeHtml(x.codeSnapshot||'')}</td><td>${escapeHtml(x.nameSnapshot||'')}</td>
+      <td style="text-align:left">${Number(x.qty||0)}</td><td>قطعة</td>
+      <td style="text-align:left">${fmtMoney(x.priceSnapshot||0)}</td><td style="text-align:left">${fmtMoney(x.lineTotal||0)}</td></tr>`).join('');
+  const words = amountToArabicWordsEGP(inv.grandTotal||0);
+  const pageStyle = kind==='th'
+    ? `<style>@page{size:80mm auto;margin:6mm} body{font-family:Arial,"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;direction:rtl}
+       table{width:100%;border-collapse:collapse;font-size:12px} th,td{padding:6px 0;border-bottom:1px dashed #999;text-align:right} th{font-weight:900}</style>`
+    : `<style>@page{size:A4;margin:12mm} body{font-family:Arial,"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;direction:rtl}
+       table{width:100%;border-collapse:collapse;font-size:12px} th,td{padding:8px;border:1px solid #ddd;text-align:right} th{background:#f5f7ff;font-weight:900}</style>`;
+  return `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">${pageStyle}</head><body>
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+      <div><div style="font-weight:900;font-size:20px">${escapeHtml(company.name||'')}</div>
+        <div style="font-size:12px;color:#333">${escapeHtml(company.address||'')}</div>
+        <div style="font-size:12px;color:#333">${phones}</div>
+      </div>
+      <div>${logo}</div>
+    </div>
+    <hr/>
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px">
+      <div><b>${title}</b></div><div>رقم: <b>${inv.invoiceNo}</b></div><div>تاريخ: <b>${date}</b></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;margin-top:8px">
+      <div>العميل: <b>${escapeHtml(inv.customerNameSnapshot||'—')}</b></div><div>النوع: <b>${pay}</b></div>
+    </div>
+    <hr/>
+    <table><thead><tr><th>رمز</th><th>المادة</th><th style="text-align:left">الكمية</th><th>الوحدة</th><th style="text-align:left">السعر</th><th style="text-align:left">القيمة</th></tr></thead>
+    <tbody>${rows}</tbody></table>
+    <hr/>
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px">
+      <div>المجموع: <b>${fmtMoney(inv.subtotal||0)}</b> ج</div>
+      <div>خصم الأصناف: <b>${fmtMoney(inv.discountItemsTotal||0)}</b> ج</div>
+      <div>خصم الفاتورة: <b>${fmtMoney(inv.discountInvoiceTotal||0)}</b> ج</div>
+      <div>الإجمالي: <b>${fmtMoney(inv.grandTotal||0)}</b> ج</div>
+      <div>المدفوع: <b>${fmtMoney(inv.paid||0)}</b> ج</div>
+      <div>المتبقي: <b>${fmtMoney(inv.remaining||0)}</b> ج</div>
+    </div>
+    <hr/>
+    <div style="font-size:12px;color:#333">المبلغ بالحروف: <b>${escapeHtml(words)}</b></div>
+    ${company.footerNote?`<hr/><div style="font-size:12px;color:#333">${escapeHtml(company.footerNote)}</div>`:''}
+    <script>window.onload=()=>window.print();</script>
+  </body></html>`;
+}
+
+async function viewInvoiceEditor(me, docType, id){
+  const permView = docType==='sale' ? 'invoices_view' : 'returns_view';
+  const permCreate = docType==='sale' ? 'invoices_create' : 'returns_create';
+  if(!hasPerm(me,permView)) return need(me,permView);
+  const customersOptions=await listCustomersOptions();
+  const products=await listProducts();
+  if(id==='new'){ if(!hasPerm(me,permCreate)) return need(me,permCreate); return renderInvoiceEditor(me,docType,{docType,items:[]},customersOptions,products); }
+  const s=await getDoc(doc(db,'invoices',id));
+  if(!s.exists()) return `<div class="card pad"><div class="h1">غير موجود</div></div>`;
+  const inv={id:s.id, ...s.data()};
+  return renderInvoiceEditor(me,docType,inv,customersOptions,products);
+}
+
+async function bindInvoiceEditor(me, docType, id){
+  const form=document.getElementById('formInv'); if(!form) return;
+  const products=await listProducts();
+  const tbody=document.querySelector('#tblLines tbody');
+  const isAdmin = me.role==='admin';
+  const disabled = (id!=='new' && !isAdmin);
+
+  let inv=null;
+  if(id!=='new'){ const s=await getDoc(doc(db,'invoices',id)); if(s.exists()) inv=s.data(); }
+
+  if(inv) form.customerId.value = inv.customerId || '';
+
+  const state={ items:(inv?.items||[]).map(x=>({productId:x.productId, codeSnapshot:x.codeSnapshot, nameSnapshot:x.nameSnapshot, qty:x.qty,
+    priceSnapshot:x.priceSnapshot, discountTypeItem:x.discountTypeItem, discountValueItem:x.discountValueItem})) };
+  if(state.items.length===0) state.items.push({productId:'', qty:1, priceSnapshot:0, discountTypeItem:'amount', discountValueItem:0});
+
+  function rerender(){
+    tbody.innerHTML = state.items.map((it,idx)=>buildLineRow(idx,it,products,disabled)).join('');
+    tbody.querySelectorAll('button[data-act="del"]').forEach(btn=>btn.addEventListener('click',()=>{
+      const idx=Number(btn.closest('tr').getAttribute('data-idx'));
+      state.items.splice(idx,1); rerender(); recalc();
+    }));
+    tbody.querySelectorAll('select,input').forEach(el=>el.addEventListener('input',()=>{
+      const tr=el.closest('tr'); const idx=Number(tr.getAttribute('data-idx'));
+      const f=el.getAttribute('data-f');
+      state.items[idx][f]=el.value;
+      if(f==='productId'){
+        const prod=products.find(p=>p.id===el.value);
+        state.items[idx].nameSnapshot=prod?.name||''; state.items[idx].codeSnapshot=prod?.code||''; state.items[idx].priceSnapshot=prod?.price||0;
+        rerender();
+      } else {
+        if(['qty','priceSnapshot','discountValueItem'].includes(f)) state.items[idx][f]=Number(el.value||0);
+        recalc();
+      }
+    }));
+    recalc();
+  }
+
+  function recalc(){
+    let subtotal=0, discItems=0, afterItems=0;
+    Array.from(tbody.querySelectorAll('tr')).forEach(tr=>{
+      const idx=Number(tr.getAttribute('data-idx')); const item=state.items[idx];
+      const qty=Number(item.qty||0); const price=Number(item.priceSnapshot||0);
+      const discType=item.discountTypeItem||'amount'; const discVal=Number(item.discountValueItem||0);
+      const {gross,disc,net}=calcLine(qty,price,discType,discVal);
+      subtotal+=gross; discItems+=disc; afterItems+=net;
+      tr.querySelector('[data-calc="total"]').textContent = fmtMoney(net);
+    });
+    const dt=form.discountTypeInvoice.value;
+    const dv=Number(form.discountValueInvoice.value||0);
+    let discInv = dt==='percent' ? afterItems*(dv/100) : dv;
+    discInv=clamp(discInv,0,afterItems);
+    const grand=afterItems-discInv;
+
+    const payType=form.payType.value;
+    let paid=Number(form.paid.value||0);
+    if(payType==='cash') paid=grand;
+    paid=clamp(paid,0,grand);
+    const remaining=grand-paid;
+
+    document.getElementById('bSubtotal').textContent = `المجموع: ${fmtMoney(subtotal)} ج`;
+    document.getElementById('bDiscItems').textContent = `خصم الأصناف: ${fmtMoney(discItems)} ج`;
+    document.getElementById('bDiscInv').textContent = `خصم الفاتورة: ${fmtMoney(discInv)} ج`;
+    document.getElementById('bGrand').textContent = `الإجمالي: ${fmtMoney(grand)} ج`;
+    document.getElementById('bRemaining').textContent = `المتبقي: ${fmtMoney(remaining)} ج`;
+    document.getElementById('moneyWords').textContent = amountToArabicWordsEGP(grand);
+    if(payType==='cash') form.paid.value = grand.toFixed(2);
+  }
+
+  document.getElementById('btnAddLine')?.addEventListener('click',()=>{ state.items.push({productId:'', qty:1, priceSnapshot:0, discountTypeItem:'amount', discountValueItem:0}); rerender(); });
+  form.discountTypeInvoice?.addEventListener('input',recalc);
+  form.discountValueInvoice?.addEventListener('input',recalc);
+  form.payType?.addEventListener('input',recalc);
+  form.paid?.addEventListener('input',recalc);
+
+  rerender();
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    if(id!=='new' && me.role!=='admin'){ toast('التعديل للأدمن فقط'); return; }
+    let customerNameSnapshot='—';
+    const customerId=form.customerId.value||'';
+    if(customerId){ const cs=await getDoc(doc(db,'customers',customerId)); if(cs.exists()) customerNameSnapshot=cs.data().name||'—'; }
+    const computed=computeFromUI(form,state.items);
+    computed.docType=docType;
+    computed.customerNameSnapshot=customerNameSnapshot;
+    if(computed.items.length===0){ toast('أضف بنوداً صحيحة'); return; }
+
+    if(id==='new'){ 
+      const newId = await runTransaction(db, async (tx)=>{
+        const cRef=doc(db,'counters','invoices'); const cSnap=await tx.get(cRef);
+        let next=1; if(cSnap.exists()) next=Number(cSnap.data().next||1);
+        tx.set(cRef,{next:next+1},{merge:true});
+        const invRef=doc(collection(db,'invoices'));
+        tx.set(invRef,{invoiceNo:next,...computed,locked:true,createdByUid:me.uid,createdByName:me.displayName||me.email||'user',createdAt:serverTimestamp()});
+        return invRef.id;
+      });
+      await logAudit(me,'CREATE_INVOICE',{docType:computed.docType, invoiceId:newId});
+      toast('تم الحفظ'); location.hash = `#/${docType==='sale'?'sale':'return'}/${newId}`;
+    } else {
+      await updateDoc(doc(db,'invoices',id),{...computed,locked:true,updatedAt:serverTimestamp(),updatedByUid:me.uid,updatedByName:me.displayName||me.email||'admin'});
+      await logAudit(me,'UPDATE_INVOICE',{docType:computed.docType, invoiceId:id});
+      toast('تم حفظ التعديل');
+    }
+  });
+
+  if(id!=='new'){
+    async function doPrint(kind){
+      const s=await getDoc(doc(db,'invoices',id)); if(!s.exists()) return;
+      const inv={id:s.id,...s.data()}; const company=await getCompany();
+      const html=renderInvoicePrint(company,inv,kind);
+      const w=window.open('','_blank'); w.document.open(); w.document.write(html); w.document.close();
+      await logAudit(me, kind==='a4'?'PRINT_INVOICE_A4':'PRINT_INVOICE_TH',{invoiceId:id, invoiceNo:inv.invoiceNo});
+    }
+    document.getElementById('btnPrintA4')?.addEventListener('click',()=>doPrint('a4'));
+    document.getElementById('btnPrintTh')?.addEventListener('click',()=>doPrint('th'));
+    document.getElementById('btnDelete')?.addEventListener('click', async ()=>{
+      if(me.role!=='admin') return;
+      const s=await getDoc(doc(db,'invoices',id)); if(!s.exists()) return;
+      const inv=s.data();
+      if(!confirm(`تأكيد حذف المستند رقم ${inv.invoiceNo}؟`)) return;
+      await deleteDoc(doc(db,'invoices',id));
+      await logAudit(me,'DELETE_INVOICE',{invoiceId:id, invoiceNo:inv.invoiceNo, docType:inv.docType, total:inv.grandTotal});
+      toast('تم الحذف'); location.hash=`#/${docType==='sale'?'invoices':'returns'}`;
+    });
+  }
+}
+
+async function viewCustomers(me){
+  const deny=need(me,'customers_view'); if(deny) return deny;
+  const canManage=hasPerm(me,'customers_manage');
+  const qy=query(collection(db,'customers'), orderBy('name','asc'), limit(500));
+  const snaps=await getDocs(qy);
+  const rows=[];
+  snaps.forEach(s=>{const d=s.data();
+    rows.push(`<tr><td>${escapeHtml(d.name||'')}</td><td>${escapeHtml(d.phone||'')}</td><td>${escapeHtml(d.address||'')}</td>
+      <td class="actions">${canManage?`<button class="btn small ghost" data-act="edit" data-id="${s.id}">تعديل</button>`:''}
+      ${me.role==='admin'?`<button class="btn small danger" data-act="del" data-id="${s.id}">حذف</button>`:''}</td></tr>`);
+  });
+  return `<div class="card pad">
+    <div class="row"><div><div class="h1">العملاء</div></div><div class="spacer"></div>${canManage?`<button class="btn no-print" id="btnNewCust">عميل جديد</button>`:''}</div>
+    <div class="hr"></div>
+    <div id="custFormWrap" class="card pad" style="display:none;background:rgba(255,255,255,.03);"></div>
+    <div style="overflow:auto"><table class="table"><thead><tr><th>الاسم</th><th>الهاتف</th><th>العنوان</th><th class="actions">إجراءات</th></tr></thead>
+      <tbody>${rows.join('')||`<tr><td colspan="4" class="muted">لا توجد بيانات.</td></tr>`}</tbody></table></div>
+  </div>`;
+}
+
+async function bindCustomers(me){
+  const canManage=hasPerm(me,'customers_manage');
+  const wrap=document.getElementById('custFormWrap');
+  document.getElementById('btnNewCust')?.addEventListener('click',()=>showForm());
+  function showForm(model=null){
+    wrap.style.display='block';
+    wrap.innerHTML=`<div class="row"><div class="h2">${model?'تعديل عميل':'عميل جديد'}</div><div class="spacer"></div><button class="btn small ghost" id="btnCloseCust">إغلاق</button></div>
+      <div class="hr"></div>
+      <form id="formCust" class="grid cols2">
+        <div class="field"><div class="label">اسم العميل</div><input class="input" name="name" required value="${escapeHtml(model?.name||'')}"></div>
+        <div class="field"><div class="label">الهاتف</div><input class="input" name="phone" value="${escapeHtml(model?.phone||'')}"></div>
+        <div class="field" style="grid-column:1/-1;"><div class="label">العنوان</div><input class="input" name="address" value="${escapeHtml(model?.address||'')}"></div>
+        <div class="row" style="grid-column:1/-1;"><button class="btn ok" type="submit">حفظ</button></div>
+      </form>`;
+    document.getElementById('btnCloseCust').onclick=()=>{wrap.style.display='none';wrap.innerHTML='';};
+    document.getElementById('formCust').onsubmit=async(e)=>{
+      e.preventDefault();
+      const fd=new FormData(e.target);
+      const data={name:fd.get('name').toString().trim(), phone:(fd.get('phone')||'').toString().trim(), address:(fd.get('address')||'').toString().trim(),
+        updatedAt:serverTimestamp()};
+      if(!data.name) return toast('الاسم مطلوب');
+      if(model){ await updateDoc(doc(db,'customers',model.id),data); await logAudit(me,'UPDATE_CUSTOMER',{customerId:model.id,name:data.name}); }
+      else { const r=await addDoc(collection(db,'customers'),{...data,createdAt:serverTimestamp()}); await logAudit(me,'CREATE_CUSTOMER',{customerId:r.id,name:data.name}); }
+      toast('تم الحفظ'); location.hash='#/customers';
+    };
+  }
+  document.querySelectorAll('button[data-act="edit"]').forEach(btn=>btn.addEventListener('click', async ()=>{
+    const id=btn.getAttribute('data-id'); const s=await getDoc(doc(db,'customers',id)); if(!s.exists()) return;
+    showForm({id,...s.data()});
+  }));
+  document.querySelectorAll('button[data-act="del"]').forEach(btn=>btn.addEventListener('click', async ()=>{
+    if(me.role!=='admin') return toast('الحذف للأدمن فقط');
+    const id=btn.getAttribute('data-id');
+    const hits=await getDocs(query(collection(db,'invoices'), where('customerId','==',id), limit(1)));
+    if(!hits.empty) return toast('لا يمكن حذف عميل عليه فواتير');
+    if(!confirm('تأكيد حذف العميل؟')) return;
+    await deleteDoc(doc(db,'customers',id)); await logAudit(me,'DELETE_CUSTOMER',{customerId:id});
+    toast('تم الحذف'); location.hash='#/customers';
+  }));
+}
+
+async function viewProducts(me){
+  const deny=need(me,'products_view'); if(deny) return deny;
+  const canManage=hasPerm(me,'products_manage');
+  const qy=query(collection(db,'products'), orderBy('name','asc'), limit(1000));
+  const snaps=await getDocs(qy);
+  const rows=[];
+  snaps.forEach(s=>{const d=s.data();
+    rows.push(`<tr><td>${escapeHtml(d.code||'')}</td><td>${escapeHtml(d.name||'')}</td><td class="num">${fmtMoney(d.price||0)}</td>
+      <td>${d.active===false?'<span class="badge danger">موقوف</span>':'<span class="badge ok">نشط</span>'}</td>
+      <td class="actions">${canManage?`<button class="btn small ghost" data-act="edit" data-id="${s.id}">تعديل</button>`:''}
+      ${me.role==='admin'?`<button class="btn small danger" data-act="del" data-id="${s.id}">حذف</button>`:''}</td></tr>`);
+  });
+  return `<div class="card pad">
+    <div class="row"><div><div class="h1">الأصناف</div><div class="muted">قائمة أسعار فقط</div></div><div class="spacer"></div>${canManage?`<button class="btn no-print" id="btnNewProd">صنف جديد</button>`:''}</div>
+    <div class="hr"></div>
+    <div id="prodFormWrap" class="card pad" style="display:none;background:rgba(255,255,255,.03);"></div>
+    <div style="overflow:auto"><table class="table"><thead><tr><th>الرمز</th><th>الاسم</th><th class="num">السعر</th><th>الحالة</th><th class="actions">إجراءات</th></tr></thead>
+      <tbody>${rows.join('')||`<tr><td colspan="5" class="muted">لا توجد بيانات.</td></tr>`}</tbody></table></div>
+  </div>`;
+}
+
+async function bindProducts(me){
+  const canManage=hasPerm(me,'products_manage');
+  const wrap=document.getElementById('prodFormWrap');
+  document.getElementById('btnNewProd')?.addEventListener('click',()=>showForm());
+  function showForm(model=null){
+    wrap.style.display='block';
+    wrap.innerHTML=`<div class="row"><div class="h2">${model?'تعديل صنف':'صنف جديد'}</div><div class="spacer"></div><button class="btn small ghost" id="btnCloseProd">إغلاق</button></div>
+      <div class="hr"></div>
+      <form id="formProd" class="grid cols2">
+        <div class="field"><div class="label">رمز</div><input class="input" name="code" value="${escapeHtml(model?.code||'')}"></div>
+        <div class="field"><div class="label">اسم</div><input class="input" name="name" required value="${escapeHtml(model?.name||'')}"></div>
+        <div class="field"><div class="label">السعر</div><input class="input" name="price" type="number" step="0.01" required value="${model?.price??0}"></div>
+        <div class="field"><div class="label">الحالة</div><select name="active"><option value="true" ${model?.active===false?'':'selected'}>نشط</option><option value="false" ${model?.active===false?'selected':''}>موقوف</option></select></div>
+        <div class="row" style="grid-column:1/-1;"><button class="btn ok" type="submit">حفظ</button></div>
+      </form>`;
+    document.getElementById('btnCloseProd').onclick=()=>{wrap.style.display='none';wrap.innerHTML='';};
+    document.getElementById('formProd').onsubmit=async(e)=>{
+      e.preventDefault();
+      const fd=new FormData(e.target);
+      const data={code:(fd.get('code')||'').toString().trim(), name:fd.get('name').toString().trim(), price:Number(fd.get('price')||0),
+        active:fd.get('active')==='true', updatedAt:serverTimestamp()};
+      if(!data.name) return toast('الاسم مطلوب');
+      if(model){ await updateDoc(doc(db,'products',model.id),data); await logAudit(me,'UPDATE_PRODUCT',{productId:model.id,name:data.name}); }
+      else { const r=await addDoc(collection(db,'products'),{...data,createdAt:serverTimestamp()}); await logAudit(me,'CREATE_PRODUCT',{productId:r.id,name:data.name}); }
+      toast('تم الحفظ'); location.hash='#/products';
+    };
+  }
+  document.querySelectorAll('button[data-act="edit"]').forEach(btn=>btn.addEventListener('click', async ()=>{
+    const id=btn.getAttribute('data-id'); const s=await getDoc(doc(db,'products',id)); if(!s.exists()) return;
+    showForm({id,...s.data()});
+  }));
+  document.querySelectorAll('button[data-act="del"]').forEach(btn=>btn.addEventListener('click', async ()=>{
+    if(me.role!=='admin') return toast('الحذف للأدمن فقط');
+    const id=btn.getAttribute('data-id');
+    if(!confirm('تأكيد حذف الصنف؟')) return;
+    await deleteDoc(doc(db,'products',id)); await logAudit(me,'DELETE_PRODUCT',{productId:id});
+    toast('تم الحذف'); location.hash='#/products';
+  }));
+}
+
+async function viewPayments(me){
+  const deny=need(me,'payments_view'); if(deny) return deny;
+  const canCreate=hasPerm(me,'payments_create');
+  const qy=query(collection(db,'payments'), orderBy('date','desc'), limit(200));
+  const snaps=await getDocs(qy);
+  const rows=[];
+  snaps.forEach(s=>{const d=s.data();
+    rows.push(`<tr><td>${escapeHtml(d.customerNameSnapshot||'—')}</td><td>${fmtDate(d.date)}</td><td class="num">${fmtMoney(d.amount||0)}</td>
+      <td>${escapeHtml(d.method||'')}</td><td>${d.invoiceNo?`فاتورة #${d.invoiceNo}`:'على الحساب'}</td>
+      <td class="actions">${hasPerm(me,'payments_print')?`<button class="btn small ghost" data-act="print" data-id="${s.id}">طباعة</button>`:''}
+      ${me.role==='admin'?`<button class="btn small danger" data-act="del" data-id="${s.id}">حذف</button>`:''}</td></tr>`);
+  });
+  return `<div class="card pad">
+    <div class="row"><div><div class="h1">الدفعات</div><div class="muted">دفعة على الحساب + مرتبطة بفاتورة</div></div><div class="spacer"></div>
+      ${canCreate?`<button class="btn no-print" id="btnNewPay">دفعة جديدة</button>`:''}</div>
+    <div class="hr"></div>
+    <div id="payFormWrap" class="card pad" style="display:none;background:rgba(255,255,255,.03);"></div>
+    <div style="overflow:auto"><table class="table"><thead><tr><th>العميل</th><th>التاريخ</th><th class="num">المبلغ</th><th>الطريقة</th><th>النوع</th><th class="actions">إجراءات</th></tr></thead>
+      <tbody>${rows.join('')||`<tr><td colspan="6" class="muted">لا توجد بيانات.</td></tr>`}</tbody></table></div>
+  </div>`;
+}
+
+function renderReceipt(company, pay, kind='a4'){
+  const phones=(company.phones||[]).join(' — ');
+  const logo=company.logoUrl?`<img src="${escapeHtml(company.logoUrl)}" style="max-height:${kind==='a4'?'70px':'50px'};object-fit:contain"/>`:'';
+  const style = kind==='th'
+    ? `<style>@page{size:80mm auto;margin:6mm} body{font-family:Arial,"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;direction:rtl} .t{font-weight:900;font-size:16px;text-align:center} .k{font-size:12px}</style>`
+    : `<style>@page{size:A4;margin:12mm} body{font-family:Arial,"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;direction:rtl} .wrap{border:1px solid #ddd;padding:12px;border-radius:10px} .t{font-weight:900;font-size:18px} .k{font-size:12px;color:#333}</style>`;
+  const content = kind==='a4'
+    ? `<div class="wrap"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><div class="t">${escapeHtml(company.name||'')}</div>
+         <div class="k">${escapeHtml(company.address||'')}</div><div class="k">${escapeHtml(phones||'')}</div></div><div>${logo}</div></div>
+        <hr/><div class="t" style="text-align:center">سند قبض</div>
+        <div class="k">التاريخ: <b>${fmtDate(pay.date)}</b></div>
+        <div class="k">العميل: <b>${escapeHtml(pay.customerNameSnapshot||'—')}</b></div>
+        <div class="k">المبلغ: <b>${fmtMoney(pay.amount||0)}</b> جنيه</div>
+        <div class="k">الطريقة: <b>${escapeHtml(pay.method||'')}</b></div>
+        <div class="k">البيان: <b>${pay.invoiceNo?`دفعة لفاتورة رقم ${pay.invoiceNo}`:'دفعة على الحساب'}</b></div>
+        ${company.footerNote?`<hr/><div class="k">${escapeHtml(company.footerNote)}</div>`:''}</div>`
+    : `<div style="text-align:center"><div class="t">${escapeHtml(company.name||'')}</div>${logo?`<div style="margin-top:6px">${logo}</div>`:''}
+        <div class="k">${escapeHtml(phones||'')}</div><hr/><div class="t">سند قبض</div>
+        <div class="k">تاريخ: <b>${fmtDate(pay.date)}</b></div><div class="k">عميل: <b>${escapeHtml(pay.customerNameSnapshot||'—')}</b></div>
+        <div class="k">مبلغ: <b>${fmtMoney(pay.amount||0)}</b></div><div class="k">طريقة: <b>${escapeHtml(pay.method||'')}</b></div>
+        <div class="k">${pay.invoiceNo?`فاتورة #${pay.invoiceNo}`:'على الحساب'}</div>
+        ${company.footerNote?`<hr/><div class="k">${escapeHtml(company.footerNote)}</div>`:''}</div>`;
+  return `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">${style}</head><body>${content}<script>window.onload=()=>window.print();</script></body></html>`;
+}
+
+async function bindPayments(me){
+  const wrap=document.getElementById('payFormWrap');
+  const customersOptions=await listCustomersOptions();
+  document.getElementById('btnNewPay')?.addEventListener('click',()=>{
+    wrap.style.display='block';
+    wrap.innerHTML=`<div class="row"><div class="h2">دفعة جديدة</div><div class="spacer"></div><button class="btn small ghost" id="btnClosePay">إغلاق</button></div>
+      <div class="hr"></div>
+      <form id="formPay" class="grid cols2">
+        <div class="field"><div class="label">التاريخ</div><input class="input" name="date" type="date" value="${new Date().toISOString().slice(0,10)}" /></div>
+        <div class="field"><div class="label">العميل</div><select name="customerId" required>${customersOptions}</select></div>
+        <div class="field"><div class="label">المبلغ</div><input class="input" name="amount" type="number" step="0.01" required /></div>
+        <div class="field"><div class="label">طريقة الدفع</div><select name="method"><option>نقداً</option><option>تحويل</option><option>فودافون كاش</option></select></div>
+        <div class="field" style="grid-column:1/-1;"><div class="label">ربط بفاتورة (اختياري)</div><input class="input" name="invoiceNo" type="number" step="1" placeholder="رقم الفاتورة أو اتركه فارغاً" /></div>
+        <div class="field" style="grid-column:1/-1;"><div class="label">ملاحظة</div><input class="input" name="note" /></div>
+        <div class="row" style="grid-column:1/-1;"><button class="btn ok" type="submit">حفظ</button></div>
+      </form>`;
+    document.getElementById('btnClosePay').onclick=()=>{wrap.style.display='none';wrap.innerHTML='';};
+    document.getElementById('formPay').onsubmit=async(e)=>{
+      e.preventDefault();
+      const fd=new FormData(e.target);
+      const customerId=fd.get('customerId')?.toString()||'';
+      const amount=Number(fd.get('amount')||0);
+      const method=(fd.get('method')||'').toString();
+      const invoiceNo=Number(fd.get('invoiceNo')||0)||null;
+      const note=(fd.get('note')||'').toString().trim();
+      const date=Timestamp.fromDate(new Date(fd.get('date')+'T12:00:00'));
+      if(!customerId) return toast('اختر عميل'); if(amount<=0) return toast('المبلغ غير صحيح');
+      const cs=await getDoc(doc(db,'customers',customerId));
+      const customerNameSnapshot=cs.exists()? (cs.data().name||''):'—';
+      let invoiceId=null, linkedInvoiceNo=null;
+      if(invoiceNo){
+        const hits=await getDocs(query(collection(db,'invoices'), where('invoiceNo','==',invoiceNo), limit(1)));
+        if(hits.empty) return toast('لم يتم العثور على رقم الفاتورة');
+        invoiceId=hits.docs[0].id; linkedInvoiceNo=invoiceNo;
+        const invRef=doc(db,'invoices',invoiceId);
+        await runTransaction(db, async (tx)=>{
+          const s=await tx.get(invRef); if(!s.exists()) throw new Error('invoice missing');
+          const inv=s.data(); const grand=Number(inv.grandTotal||0); const paidOld=Number(inv.paid||0);
+          const paidNew=clamp(paidOld+amount,0,grand);
+          tx.update(invRef,{paid:paidNew, remaining: grand-paidNew, updatedAt:serverTimestamp()});
+        });
+      }
+      const r=await addDoc(collection(db,'payments'),{customerId,customerNameSnapshot,amount,method,note,date,invoiceId,invoiceNo:linkedInvoiceNo,onAccount:!invoiceId,
+        createdByUid:me.uid,createdByName:me.displayName||me.email||'user',createdAt:serverTimestamp()});
+      await logAudit(me,'CREATE_PAYMENT',{paymentId:r.id, amount, customerId, invoiceNo:linkedInvoiceNo});
+      toast('تم الحفظ'); location.hash='#/payments';
+    };
+  });
+
+  document.querySelectorAll('button[data-act="print"]').forEach(btn=>btn.addEventListener('click', async ()=>{
+    if(!hasPerm(me,'payments_print')) return toast('لا تملك صلاحية الطباعة');
+    const id=btn.getAttribute('data-id'); const s=await getDoc(doc(db,'payments',id)); if(!s.exists()) return;
+    const pay={id,...s.data()}; const company=await getCompany();
+    const kind = confirm('طباعة حراري؟ (OK=حراري, Cancel=A4)') ? 'th' : 'a4';
+    const html=renderReceipt(company,pay,kind);
+    const w=window.open('','_blank'); w.document.open(); w.document.write(html); w.document.close();
+    await logAudit(me, kind==='th'?'PRINT_RECEIPT_TH':'PRINT_RECEIPT_A4',{paymentId:id});
+  }));
+
+  document.querySelectorAll('button[data-act="del"]').forEach(btn=>btn.addEventListener('click', async ()=>{
+    if(me.role!=='admin') return toast('الحذف للأدمن فقط');
+    const id=btn.getAttribute('data-id'); const s=await getDoc(doc(db,'payments',id)); if(!s.exists()) return;
+    const pay=s.data(); if(!confirm('تأكيد حذف الدفعة؟')) return;
+    if(pay.invoiceId){
+      const invRef=doc(db,'invoices',pay.invoiceId);
+      await runTransaction(db, async (tx)=>{
+        const invS=await tx.get(invRef);
+        if(invS.exists()){
+          const inv=invS.data(); const grand=Number(inv.grandTotal||0); const paidOld=Number(inv.paid||0);
+          const paidNew=clamp(paidOld-Number(pay.amount||0),0,grand);
+          tx.update(invRef,{paid:paidNew, remaining: grand-paidNew, updatedAt:serverTimestamp()});
+        }
+      });
+    }
+    await deleteDoc(doc(db,'payments',id));
+    await logAudit(me,'DELETE_PAYMENT',{paymentId:id, amount:pay.amount, invoiceNo:pay.invoiceNo||null});
+    toast('تم الحذف'); location.hash='#/payments';
+  }));
+}
+
+async function viewReports(me){
+  const deny=need(me,'reports_view'); if(deny) return deny;
+  return `<div class="card pad">
+    <div class="h1">التقارير</div>
+    <div class="muted">تقرير بين تاريخين + أرصدة العملاء (بدون افتتاحي)</div>
+    <div class="hr"></div>
+    <div class="grid cols2">
+      <div class="card pad" style="background:rgba(255,255,255,.03);">
+        <div class="h2">تقرير بين تاريخين</div>
+        <form id="formRep" class="grid">
+          <div class="field"><div class="label">من</div><input class="input" type="date" name="from" required></div>
+          <div class="field"><div class="label">إلى</div><input class="input" type="date" name="to" required></div>
+          <div class="row"><button class="btn ok" type="submit">عرض</button>
+            ${hasPerm(me,'reports_export')?`<button class="btn ghost" type="button" id="btnCSV" disabled>تصدير CSV</button>`:''}
+          </div>
+        </form>
+        <div class="hr"></div><div id="repOut" class="muted">—</div>
+      </div>
+      <div class="card pad" style="background:rgba(255,255,255,.03);">
+        <div class="h2">أرصدة العملاء</div>
+        <button class="btn ok" id="btnBalances">حساب</button>
+        <div class="hr"></div>
+        <pre id="balOut" class="muted" style="white-space:pre-wrap;margin:0;">—</pre>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function bindReports(me){
+  const form=document.getElementById('formRep');
+  const out=document.getElementById('repOut');
+  const btnCSV=document.getElementById('btnCSV');
+  let lastRows=[];
+  form?.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(form);
+    const fromTs=Timestamp.fromDate(new Date(fd.get('from')+'T00:00:00'));
+    const toTs=Timestamp.fromDate(new Date(fd.get('to')+'T23:59:59'));
+    const qy=query(collection(db,'invoices'), where('date','>=',fromTs), where('date','<=',toTs), orderBy('date','desc'), limit(2000));
+    const snaps=await getDocs(qy);
+    let sales=0, returns=0; lastRows=[];
+    snaps.forEach(s=>{const d=s.data(); if(d.docType==='return') returns+=Number(d.grandTotal||0); else sales+=Number(d.grandTotal||0);
+      lastRows.push({invoiceNo:d.invoiceNo,date:fmtDate(d.date),customer:d.customerNameSnapshot||'',docType:d.docType,total:d.grandTotal});});
+    out.textContent = `مبيعات: ${fmtMoney(sales)} ج — مرتجعات: ${fmtMoney(returns)} ج — صافي: ${fmtMoney(sales-returns)} ج — عدد: ${lastRows.length}`;
+    if(btnCSV) btnCSV.disabled = !(lastRows.length>0);
+  });
+  btnCSV?.addEventListener('click', ()=>{
+    if(!hasPerm(me,'reports_export')) return;
+    const header=['invoiceNo','date','customer','docType','total'];
+    const csv=[header.join(',')].concat(lastRows.map(r=>header.map(k=>String(r[k]??'').replaceAll(',',' ')).join(','))).join('\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`sales_report_${Date.now()}.csv`; a.click(); URL.revokeObjectURL(a.href);
+  });
+  document.getElementById('btnBalances')?.addEventListener('click', async ()=>{
+    const balOut=document.getElementById('balOut'); balOut.textContent='جاري الحساب...';
+    const cs=await getDocs(query(collection(db,'customers'), orderBy('name','asc'), limit(2000)));
+    const balances=[];
+    for(const c of cs.docs){
+      const id=c.id; const name=c.data().name||'';
+      const invS=await getDocs(query(collection(db,'invoices'), where('customerId','==',id), limit(5000)));
+      let invRemaining=0;
+      invS.forEach(s=>{const d=s.data(); const rem=Number(d.remaining||0); invRemaining += (d.docType==='return' ? -rem : rem);});
+      const payS=await getDocs(query(collection(db,'payments'), where('customerId','==',id), limit(5000)));
+      let pays=0; payS.forEach(s=>pays+=Number(s.data().amount||0));
+      const bal=invRemaining - pays;
+      balances.push({name, bal});
+    }
+    balances.sort((a,b)=>b.bal-a.bal);
+    balOut.textContent = balances.map(x=>`${x.name}: ${fmtMoney(x.bal)} ج`).join('\n') || 'لا توجد بيانات';
+  });
+}
+
+async function viewCompany(me){
+  const deny=need(me,'company_manage'); if(deny) return deny;
+  const company=await getCompany();
+  const phones=(company.phones||[]).join('\n');
+  return `<div class="card pad">
+    <div class="row"><div><div class="h1">بيانات الشركة</div><div class="muted">رفع لوجو وتعديل بيانات</div></div><div class="spacer"></div><span class="badge ok">Admin</span></div>
+    <div class="hr"></div>
+    <form id="formCompany" class="grid cols2">
+      <div class="field"><div class="label">اسم الشركة</div><input class="input" name="name" required value="${escapeHtml(company.name||'')}"></div>
+      <div class="field"><div class="label">العنوان</div><input class="input" name="address" value="${escapeHtml(company.address||'')}"></div>
+      <div class="field" style="grid-column:1/-1;"><div class="label">أرقام (كل رقم بسطر)</div><textarea name="phones">${escapeHtml(phones)}</textarea></div>
+      <div class="field" style="grid-column:1/-1;"><div class="label">ملاحظة أسفل الفاتورة</div><textarea name="footerNote">${escapeHtml(company.footerNote||'')}</textarea></div>
+      <div class="card pad" style="grid-column:1/-1;background:rgba(255,255,255,.03);">
+        <div class="row"><div><div class="h2">اللوجو</div><div class="muted">Storage: company/logo.png</div></div><div class="spacer"></div>
+          ${company.logoUrl?`<a class="btn small ghost" target="_blank" href="${escapeHtml(company.logoUrl)}">عرض</a>`:''}
+        </div>
+        <div class="hr"></div>
+        <div class="row">
+          <input class="input" id="fileLogo" type="file" accept="image/*" style="max-width:420px">
+          <button class="btn small ok" type="button" id="btnUploadLogo">رفع/تحديث</button>
+          ${company.logoUrl?`<button class="btn small danger" type="button" id="btnDeleteLogo">حذف</button>`:''}
+        </div>
+      </div>
+      <div class="row" style="grid-column:1/-1;"><button class="btn ok" type="submit">حفظ</button></div>
+    </form>
+  </div>`;
+}
+
+async function bindCompany(me){
+  const form=document.getElementById('formCompany');
+  form?.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(form);
+    const phones=(fd.get('phones')||'').toString().split('\n').map(s=>s.trim()).filter(Boolean);
+    const data={name:fd.get('name').toString().trim(), address:(fd.get('address')||'').toString().trim(), phones,
+      footerNote:(fd.get('footerNote')||'').toString().trim(), updatedAt:serverTimestamp(), updatedBy:me.uid};
+    await setDoc(doc(db,'settings','company'), data, {merge:true});
+    await logAudit(me,'UPDATE_COMPANY',{});
+    toast('تم الحفظ');
+  });
+  document.getElementById('btnUploadLogo')?.addEventListener('click', async ()=>{
+    const file=document.getElementById('fileLogo')?.files?.[0];
+    if(!file) return toast('اختر صورة أولاً');
+    const path='company/logo.png';
+    const r=sRef(storage,path);
+    await uploadBytes(r,file,{contentType:file.type});
+    const url=await getDownloadURL(r);
+    await setDoc(doc(db,'settings','company'),{logoUrl:url, updatedAt:serverTimestamp(), updatedBy:me.uid},{merge:true});
+    await logAudit(me,'UPLOAD_LOGO',{path});
+    toast('تم رفع اللوجو'); location.hash='#/company';
+  });
+  document.getElementById('btnDeleteLogo')?.addEventListener('click', async ()=>{
+    if(!confirm('تأكيد حذف اللوجو؟')) return;
+    const path='company/logo.png';
+    try{ await deleteObject(sRef(storage,path)); }catch(e){}
+    await setDoc(doc(db,'settings','company'),{logoUrl:'', updatedAt:serverTimestamp(), updatedBy:me.uid},{merge:true});
+    await logAudit(me,'DELETE_LOGO',{path});
+    toast('تم الحذف'); location.hash='#/company';
+  });
+}
+
+async function viewUsers(me){
+  const deny=need(me,'users_manage'); if(deny) return deny;
+  const qy=query(collection(db,'users'), orderBy('displayName','asc'), limit(200));
+  const snaps=await getDocs(qy);
+  const rows=[];
+  snaps.forEach(s=>{const d=s.data();
+    rows.push(`<tr><td>${escapeHtml(d.displayName||'')}</td><td>${escapeHtml(d.role||'user')}</td>
+      <td>${d.active?'<span class="badge ok">مفعل</span>':'<span class="badge danger">موقوف</span>'}</td>
+      <td class="actions"><button class="btn small ghost" data-act="edit" data-id="${s.id}">تعديل</button></td></tr>`);
+  });
+  return `<div class="card pad">
+    <div class="h1">المستخدمون والصلاحيات</div>
+    <div class="muted">إنشاء Email/Password يتم من Firebase Auth، هنا نحدد الدور/التفعيل/الصلاحيات.</div>
+    <div class="hr"></div>
+    <div class="card pad" style="background:rgba(255,255,255,.03);">
+      <div class="h2">إضافة مستخدم</div>
+      <ol class="muted" style="margin:0;padding-inline-start:18px;">
+        <li>Firebase Auth → Add user</li>
+        <li>انسخ UID</li>
+        <li>اضغط “مستخدم جديد” والصقه</li>
+      </ol>
+      <div class="hr"></div>
+      <button class="btn no-print" id="btnNewUser">مستخدم جديد</button>
+    </div>
+    <div class="hr"></div>
+    <div id="userFormWrap" class="card pad" style="display:none;background:rgba(255,255,255,.03);"></div>
+    <div style="overflow:auto"><table class="table"><thead><tr><th>الاسم</th><th>الدور</th><th>الحالة</th><th class="actions">إجراءات</th></tr></thead>
+      <tbody>${rows.join('')||`<tr><td colspan="4" class="muted">لا توجد بيانات.</td></tr>`}</tbody></table></div>
+  </div>`;
+}
+
+async function bindUsers(me){
+  const wrap=document.getElementById('userFormWrap');
+  document.getElementById('btnNewUser')?.addEventListener('click',()=>showForm(null,true));
+  function permChecks(selected){ return Object.entries(PERMS).map(([k,label])=>{
+    const checked = selected?.[k] ? 'checked' : '';
+    return `<label class="row" style="justify-content:space-between;margin:6px 0;gap:12px;"><span>${escapeHtml(label)}</span><input type="checkbox" name="perm_${k}" ${checked} /></label>`;
+  }).join(''); }
+
+  async function showForm(userId,isNew=false){
+    let model=null;
+    if(userId){ const s=await getDoc(doc(db,'users',userId)); if(s.exists()) model={id:userId,...s.data()}; }
+    wrap.style.display='block';
+    wrap.innerHTML=`<div class="row"><div class="h2">${isNew?'مستخدم جديد':'تعديل مستخدم'}</div><div class="spacer"></div><button class="btn small ghost" id="btnCloseUser">إغلاق</button></div>
+      <div class="hr"></div>
+      <form id="formUser" class="grid cols2">
+        <div class="field"><div class="label">UID</div><input class="input" name="uid" ${isNew?'':'disabled'} value="${escapeHtml(model?.id||'')}" required placeholder="الصقه من Auth"></div>
+        <div class="field"><div class="label">الاسم المعروض</div><input class="input" name="displayName" required value="${escapeHtml(model?.displayName||'')}"></div>
+        <div class="field"><div class="label">الدور</div><select name="role"><option value="user" ${model?.role==='admin'?'':'selected'}>user</option><option value="admin" ${model?.role==='admin'?'selected':''}>admin</option></select></div>
+        <div class="field"><div class="label">الحالة</div><select name="active"><option value="true" ${model?.active===false?'':'selected'}>مفعل</option><option value="false" ${model?.active===false?'selected':''}>موقوف</option></select></div>
+        <div class="card pad" style="grid-column:1/-1;background:rgba(255,255,255,.03);">
+          <div class="h2">الصلاحيات</div><div class="muted">الأدمن يمتلك كل الصلاحيات تلقائياً.</div><div class="hr"></div>
+          <div class="grid cols2">${permChecks(model?.permissions||{})}</div>
+        </div>
+        <div class="row" style="grid-column:1/-1;"><button class="btn ok" type="submit">حفظ</button></div>
+      </form>`;
+    document.getElementById('btnCloseUser').onclick=()=>{wrap.style.display='none';wrap.innerHTML='';};
+    document.getElementById('formUser').onsubmit=async(e)=>{
+      e.preventDefault();
+      const fd=new FormData(e.target);
+      const uid=fd.get('uid')?.toString().trim();
+      const displayName=fd.get('displayName')?.toString().trim();
+      const role=fd.get('role')?.toString()||'user';
+      const active=fd.get('active')==='true';
+      const permissions={}; Object.keys(PERMS).forEach(k=>permissions[k]=(fd.get(`perm_${k}`)==='on'));
+      if(!uid||!displayName) return toast('بيانات ناقصة');
+      await setDoc(doc(db,'users',uid),{displayName,role,active,permissions,updatedAt:serverTimestamp(),updatedBy:me.uid},{merge:true});
+      await logAudit(me,isNew?'CREATE_USER':'UPDATE_USER',{uid,role,active});
+      toast('تم الحفظ'); location.hash='#/users';
+    };
+  }
+
+  document.querySelectorAll('button[data-act="edit"]').forEach(btn=>btn.addEventListener('click',()=>showForm(btn.getAttribute('data-id'),false)));
+}
+
+async function viewAudit(me){
+  const deny=need(me,'audit_view'); if(deny) return deny;
+  const snaps=await getDocs(query(collection(db,'auditLogs'), orderBy('at','desc'), limit(200)));
+  const rows=[]; snaps.forEach(s=>{const d=s.data();
+    rows.push(`<tr><td>${fmtDateTime(d.at)}</td><td>${escapeHtml(d.byName||'')}</td><td>${escapeHtml(d.action||'')}</td><td class="muted">${escapeHtml(JSON.stringify(d.meta||{}))}</td></tr>`);
+  });
+  return `<div class="card pad"><div class="h1">سجل العمليات</div><div class="muted">آخر 200 عملية</div><div class="hr"></div>
+    <div style="overflow:auto"><table class="table"><thead><tr><th>الوقت</th><th>المستخدم</th><th>العملية</th><th>تفاصيل</th></tr></thead>
+    <tbody>${rows.join('')||`<tr><td colspan="4" class="muted">لا توجد بيانات.</td></tr>`}</tbody></table></div></div>`;
+}
+
+const navItems=[
+  {href:'#/dashboard', label:'الرئيسية', perm:'reports_view'},
+  {href:'#/invoices', label:'فواتير المبيعات', perm:'invoices_view'},
+  {href:'#/returns', label:'مرتجعات المبيعات', perm:'returns_view'},
+  {href:'#/customers', label:'العملاء', perm:'customers_view'},
+  {href:'#/products', label:'الأصناف', perm:'products_view'},
+  {href:'#/payments', label:'الدفعات', perm:'payments_view'},
+  {href:'#/reports', label:'التقارير', perm:'reports_view'},
+  {href:'#/audit', label:'سجل العمليات', perm:'audit_view', tag:'Admin'},
+  {href:'#/company', label:'بيانات الشركة', perm:'company_manage', tag:'Admin'},
+  {href:'#/users', label:'المستخدمون', perm:'users_manage', tag:'Admin'}
+];
+
+function openMenu(open=true){ elSidebar.classList.toggle('open', open); }
+document.getElementById('btnMenu').addEventListener('click',()=>openMenu(true));
+document.getElementById('btnCloseMenu').addEventListener('click',()=>openMenu(false));
+elSidebar.addEventListener('click',(e)=>{ if(e.target.matches('a')) openMenu(false); });
+
+let authUser=null; let me=null;
+
+btnLogout.addEventListener('click', async ()=>{ await signOut(auth); });
+
+function renderNav(){
+  const items = navItems.filter(it=>me && hasPerm(me,it.perm));
+  elNav.innerHTML = items.map(it=>{
+    const active = location.hash.startsWith(it.href) ? 'active' : '';
+    const tag = it.tag ? `<span class="tag">${it.tag}</span>` : '';
+    return `<a class="${active}" href="${it.href}">${it.label}${tag}</a>`;
+  }).join('');
+}
+
+async function route(){
+  const hash = location.hash || '#/dashboard';
+  const parts = hash.replace(/^#\/?/,'').split('/');
+  const r0 = parts[0] || 'dashboard';
+  const r1 = parts[1] || '';
+
+  if(!authUser){
+    elView.innerHTML = await viewLogin();
+    bindLoginForm();
+    renderNav();
+    return;
+  }
+
+  if(me && me.active===false){
+    elView.innerHTML = `<div class="card pad" style="max-width:720px;margin:24px auto;">
+      <div class="h1">الحساب غير مفعل</div>
+      <div class="muted">اطلب من الأدمن تفعيل المستخدم داخل “المستخدمون”.</div>
+      <div class="hr"></div>
+      <button class="btn ghost" id="btnLogout2">تسجيل خروج</button>
+    </div>`;
+    document.getElementById('btnLogout2').onclick=()=>signOut(auth);
+    return;
+  }
+
+  try{
+    switch(r0){
+      case 'dashboard': elView.innerHTML = await viewDashboard(me); break;
+      case 'invoices': elView.innerHTML = await viewInvoices(me,'sale'); break;
+      case 'returns': elView.innerHTML = await viewInvoices(me,'return'); break;
+      case 'sale': elView.innerHTML = await viewInvoiceEditor(me,'sale',r1||'new'); await bindInvoiceEditor(me,'sale',r1||'new'); break;
+      case 'return': elView.innerHTML = await viewInvoiceEditor(me,'return',r1||'new'); await bindInvoiceEditor(me,'return',r1||'new'); break;
+      case 'customers': elView.innerHTML = await viewCustomers(me); await bindCustomers(me); break;
+      case 'products': elView.innerHTML = await viewProducts(me); await bindProducts(me); break;
+      case 'payments': elView.innerHTML = await viewPayments(me); await bindPayments(me); break;
+      case 'reports': elView.innerHTML = await viewReports(me); await bindReports(me); break;
+      case 'company': elView.innerHTML = await viewCompany(me); await bindCompany(me); break;
+      case 'users': elView.innerHTML = await viewUsers(me); await bindUsers(me); break;
+      case 'audit': elView.innerHTML = await viewAudit(me); break;
+      default: location.hash='#/dashboard'; return;
+    }
+  }catch(e){
+    console.error(e);
+    elView.innerHTML = `<div class="card pad"><div class="h1">حدث خطأ</div><div class="muted">${escapeHtml(e.message||String(e))}</div></div>`;
+  }
+  renderNav();
+}
+
+onAuthStateChanged(auth, async (u)=>{
+  authUser=u;
+  if(!u){
+    me=null;
+    elChipUser.textContent='غير مسجل';
+    btnLogout.style.display='none';
+    await route();
+    return;
+  }
+  const ref=doc(db,'users',u.uid);
+  const snap=await getDoc(ref);
+  const profile=snap.exists()? snap.data(): null;
+  me = profile ? ({uid:u.uid, email:u.email, ...profile}) : ({uid:u.uid, email:u.email, role:'user', active:false});
+  elChipUser.textContent = (me.displayName || u.email || 'مستخدم');
+  btnLogout.style.display='inline-flex';
+  if(!location.hash) location.hash='#/dashboard';
+  await route();
+});
+
+window.addEventListener('hashchange',()=>route());
+route();
+</script>
+</body>
+</html>
