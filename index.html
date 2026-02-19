@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jood kids seals — نظام المبيعات</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <button class="iconbtn" id="btnMenu" aria-label="القائمة">☰</button>
+      <div class="brand">
+        <div class="brand-title">Jood kids seals</div>
+        <div class="brand-sub">نظام المبيعات — GitHub + Firebase</div>
+      </div>
+      <div class="topbar-right">
+        <div class="chip" id="chipUser">غير مسجل</div>
+        <button class="btn ghost" id="btnLogout" style="display:none">تسجيل خروج</button>
+      </div>
+    </header>
+
+    <aside class="sidebar" id="sidebar" aria-label="القائمة">
+      <div class="sidebar-head">
+        <div class="sidebar-title">القائمة</div>
+        <button class="iconbtn" id="btnCloseMenu" aria-label="إغلاق">✕</button>
+      </div>
+      <nav class="nav" id="nav"></nav>
+      <div class="sidebar-foot">
+        <div class="muted">نسخة: <span id="ver"></span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <div id="view"></div>
+    </main>
+  </div>
+
+  <!-- App -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
