@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATGR MO | PRO+++</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <section id="loginPage" class="center">
+    <div class="card authCard">
+      <div class="brandRow">
+        <div class="brandMark">م</div>
+        <div>
+          <div class="brandTitle">MATGR MO</div>
+          <div class="brandSub">POS + محاسبة (بدون ضرائب) • Excel • PDF</div>
+        </div>
+      </div>
+
+      <h2 class="h2">تسجيل الدخول</h2>
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input id="loginEmail" type="email" placeholder="admin@erp.local" />
+      </div>
+      <div class="field">
+        <label>كلمة المرور</label>
+        <input id="loginPassword" type="password" placeholder="Admin123" />
+      </div>
+      <button class="btn primary" id="btnLogin">دخول</button>
+      <div class="hint" id="loginError"></div>
+    </div>
+  </section>
+
+  <section id="shell" class="shell" style="display:none;">
+    <div id="drawerBackdrop" class="drawerBackdrop" style="display:none;"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sideTop">
+        <div class="brandRow compact">
+          <div class="brandMark sm" id="companyLogoMini">م</div>
+          <div class="brandText">
+            <div class="brandTitle" id="companyNameMini">MATGR MO</div>
+            <div class="brandSub" id="companyBranchMini">فرع واحد</div>
+          </div>
+        </div>
+        <div class="userBox">
+          <div class="userLine"><span id="userEmail"></span></div>
+          <div class="userLine small">الدور: <b id="userRole"></b></div>
+        </div>
+      </div>
+
+      <nav class="nav" id="nav">
+        <button class="navBtn" data-view="home">الرئيسية</button>
+        <button class="navBtn" data-view="pos">POS</button>
+
+        <div class="navGroupTitle">فواتير</div>
+        <button class="navBtn" data-view="salesInvoices">فواتير المبيعات</button>
+        <button class="navBtn" data-view="salesReturns">مرتجع المبيعات</button>
+        <button class="navBtn" data-view="purchaseInvoices">فواتير المشتريات</button>
+        <button class="navBtn" data-view="purchaseReturns">مرتجع مشتريات</button>
+
+        <div class="navGroupTitle">سندات</div>
+        <button class="navBtn" data-view="receiptVoucher">سند قبض</button>
+        <button class="navBtn" data-view="paymentVoucher">سند دفع</button>
+        <button class="navBtn" data-view="openingEntry">قيد افتتاحي</button>
+
+        <div class="navGroupTitle">إعدادات</div>
+        <button class="navBtn" data-view="items">دليل المواد</button>
+        <button class="navBtn" data-view="customers">دليل العملاء</button>
+        <button class="navBtn" data-view="suppliers">دليل الموردين</button>
+        <button class="navBtn" data-view="accounts">دليل الحسابات</button>
+        <button class="navBtn" data-view="map">ربط الحسابات</button>
+
+        <div class="navGroupTitle">تقارير مخزنية</div>
+        <button class="navBtn" data-view="invReports">تقارير المخزون</button>
+
+        <div class="navGroupTitle">تقارير مالية</div>
+        <button class="navBtn" data-view="trial">ميزان مراجعة</button>
+        <button class="navBtn" data-view="custStatement">كشف حساب عميل</button>
+        <button class="navBtn" data-view="supStatement">كشف حساب مورد</button>
+        <button class="navBtn" data-view="balances">أرصدة العملاء والموردين</button>
+        <button class="navBtn" data-view="cogs">تكلفة البضاعة المباعة</button>
+        <button class="navBtn" data-view="cashJournal">يومية الصندوق</button>
+
+        <div class="navGroupTitle">إدارة</div>
+        <button class="navBtn" data-view="users">المستخدمون والصلاحيات</button>
+        <button class="navBtn" data-view="company">بيانات الشركة</button>
+        <button class="navBtn" data-view="audit">سجل العمليات</button>
+      </nav>
+
+      <div class="sideBottom">
+        <button class="btn ghost" id="btnAnnualClose">إقفال سنة وتدوير أرصدة</button>
+        <button class="btn danger" id="btnLogout">تسجيل خروج</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topLeft">
+          <button class="hamburger" id="btnHamburger">☰</button>
+          <div class="pageTitle" id="pageTitle">الرئيسية</div>
+        </div>
+        <div class="topRight">
+          <div class="pill" id="periodPill">الفترة: مفتوحة</div>
+        </div>
+      </header>
+
+
+      <nav class="iconbar iconbar-top" id="topIconBar" aria-label="التنقل العلوي">
+        <button class="iconBtn" data-view="home" title="الرئيسية">
+          <span class="ico" aria-hidden="true">🏠</span><span class="lbl">الرئيسية</span>
+        </button>
+        <button class="iconBtn" data-view="pos" title="POS">
+          <span class="ico" aria-hidden="true">🧾</span><span class="lbl">POS</span>
+        </button>
+        <button class="iconBtn" data-view="salesInvoices" title="مبيعات">
+          <span class="ico" aria-hidden="true">📈</span><span class="lbl">مبيعات</span>
+        </button>
+        <button class="iconBtn" data-view="purchaseInvoices" title="مشتريات">
+          <span class="ico" aria-hidden="true">📦</span><span class="lbl">مشتريات</span>
+        </button>
+        <button class="iconBtn" data-view="invReports" title="المخزون">
+          <span class="ico" aria-hidden="true">🏬</span><span class="lbl">مخزون</span>
+        </button>
+        <button class="iconBtn" data-view="trial" title="تقارير">
+          <span class="ico" aria-hidden="true">📊</span><span class="lbl">تقارير</span>
+        </button>
+        <button class="iconBtn" data-action="more" title="المزيد">
+          <span class="ico" aria-hidden="true">☰</span><span class="lbl">المزيد</span>
+        </button>
+      </nav>
+
+      <div class="content" id="content"></div>
+
+
+      <nav class="iconbar iconbar-bottom" id="bottomIconBar" aria-label="التنقل السفلي">
+        <button class="iconBtn" data-view="home" title="الرئيسية">
+          <span class="ico" aria-hidden="true">🏠</span><span class="lbl">الرئيسية</span>
+        </button>
+        <button class="iconBtn" data-view="pos" title="POS">
+          <span class="ico" aria-hidden="true">🧾</span><span class="lbl">POS</span>
+        </button>
+        <button class="iconBtn" data-view="salesInvoices" title="مبيعات">
+          <span class="ico" aria-hidden="true">📈</span><span class="lbl">مبيعات</span>
+        </button>
+        <button class="iconBtn" data-view="receiptVoucher" title="سندات">
+          <span class="ico" aria-hidden="true">💳</span><span class="lbl">سندات</span>
+        </button>
+        <button class="iconBtn" data-view="invReports" title="مخزون">
+          <span class="ico" aria-hidden="true">🏬</span><span class="lbl">مخزون</span>
+        </button>
+        <button class="iconBtn" data-view="cogs" title="ربحية">
+          <span class="ico" aria-hidden="true">💰</span><span class="lbl">ربحية</span>
+        </button>
+        <button class="iconBtn" data-action="more" title="المزيد">
+          <span class="ico" aria-hidden="true">☰</span><span class="lbl">المزيد</span>
+        </button>
+      </nav>
+
+    </main>
+  </section>
+
+  <div id="modalBackdrop" class="modalBackdrop" style="display:none;">
+    <div class="modal">
+      <div class="modalTitle" id="modalTitle">-</div>
+      <div class="modalBody" id="modalBody"></div>
+      <div class="modalActions">
+        <button class="btn" id="modalCancel">إلغاء</button>
+        <button class="btn primary" id="modalOk">موافق</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
